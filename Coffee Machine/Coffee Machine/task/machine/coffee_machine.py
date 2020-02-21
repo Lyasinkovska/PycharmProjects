@@ -49,4 +49,4 @@ if action == "buy":
         beans -= coffee["espresso"]["beans"]
         cups -= coffee["espresso"]["cups"]
         money += coffee["espresso"]["price"]
-
+print(machine_state)
