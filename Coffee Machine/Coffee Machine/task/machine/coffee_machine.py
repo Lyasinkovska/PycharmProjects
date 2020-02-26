@@ -3,19 +3,9 @@
       '\nBoiling water\nMixing boiled water with crushed coffee '
       'beans\nPouring coffee into the cup\nPouring some '
       'milk into the cup\nCoffee is ready!')
+'''
 
-result = [water_c/water, milk_c/milk, beans_c/beans]
-min_res = int((min(result)))
-
-if min_res < cups:
-      print("No, I can make only {} cup(s) of coffee".format(min_res))
-elif min_res == cups:
-      print("Yes, I can make that amount of coffee")
-else:
-      print("Yes, I can make that amount of coffee (and even {} "
-            "more than that)".format(min_res-cups)) '''
-
-coffee = {"machine": {"water": 1200, "milk": 540, "beans": 120, "cups": 9, "money": 550},
+coffee = {"machine": {"water": 400, "milk": 540, "beans": 120, "cups": 9, "money": 550},
           "espresso": {"water": 250, "milk": 0, "beans": 16, "cups": 1, "price": 4},
           "latte": {"water": 350, "milk": 75, "beans": 20, "cups": 1, "price": 7},
           "cappuccino": {"water": 200, "milk": 100, "beans": 12, "cups": 1, "price": 6}}
@@ -81,14 +71,15 @@ def cappuccino():
 
 
 def buy():
-    buy = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n")
-    print(buy)
+    buy = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - go back:\n")
     if buy == "1":
         espresso()
     elif buy == "2":
         latte()
     elif buy == "3":
         cappuccino()
+    elif buy == "4":
+        print(action)
 
 
 def fill():
@@ -100,7 +91,6 @@ def fill():
     coffee["machine"]["milk"] += milk_fill
     coffee["machine"]["beans"] += beans_fill
     coffee["machine"]["cups"] += cups_fill
-
 
 
 def take(money):

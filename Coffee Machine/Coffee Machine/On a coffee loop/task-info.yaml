@@ -748,5 +748,5 @@ files:
     print("Coffee is ready!")
   learner_created: false
 feedback_link: https://hyperskill.org/projects/68/stages/370/implement
-status: Unchecked
+status: Solved
 record: -1
