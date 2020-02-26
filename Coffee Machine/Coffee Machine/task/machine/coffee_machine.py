@@ -21,69 +21,91 @@ coffee = {"machine": {"water": 1200, "milk": 540, "beans": 120, "cups": 9, "mone
           "cappuccino": {"water": 200, "milk": 100, "beans": 12, "cups": 1, "price": 6}}
 
 
-
-
-def change_filling():
-    pass
-
 def remaining(water, milk, beans, cups, money):
-    #change_filling(water, milk, beans, cups, money)
     return "The coffee machine has:\n{} of water\n{} of milk\n{} of coffee beans" \
                 "\n{} of disposable cups\n{} of money".format(water, milk, beans, cups, money)
 
 
-def espresso(water, milk, beans, cups, money):
-    coffee["machine"]["water"] -= coffee["espresso"]["water"]
-    coffee["machine"]["beans"] -= coffee["espresso"]["beans"]
-    coffee["machine"]["milk"] -= coffee["espresso"]["milk"]
-    coffee["machine"]["cups"] -= coffee["espresso"]["cups"]
-    coffee["machine"]["money"] += coffee["espresso"]["price"]
-    return water, beans, milk, cups, money
+def espresso():
+    if coffee["machine"]["water"] < coffee["espresso"]["water"]:
+        print("Sorry, not enough water!")
+    elif coffee["machine"]["beans"] < coffee["espresso"]["beans"]:
+        print("Sorry, not enough coffee beans!")
+    elif coffee["machine"]["milk"] < coffee["espresso"]["milk"]:
+        print("Sorry, not enough milk!")
+    elif coffee["machine"]["cups"] < coffee["espresso"]["cups"]:
+        print("Sorry, not enough disposable cups!")
+    else:
+        print("I have enough resources, making you a coffee!")
+        coffee["machine"]["water"] -= coffee["espresso"]["water"]
+        coffee["machine"]["beans"] -= coffee["espresso"]["beans"]
+        coffee["machine"]["milk"] -= coffee["espresso"]["milk"]
+        coffee["machine"]["cups"] -= coffee["espresso"]["cups"]
+        coffee["machine"]["money"] += coffee["espresso"]["price"]
 
 
-def latte(water, milk, beans, cups, money):
-    coffee["machine"]["water"] -= coffee["latte"]["water"]
-    coffee["machine"]["beans"] -= coffee["latte"]["beans"]
-    coffee["machine"]["milk"] -= coffee["latte"]["milk"]
-    coffee["machine"]["cups"] -= coffee["latte"]["cups"]
-    coffee["machine"]["money"] += coffee["latte"]["price"]
-    return water, beans, milk, cups, money
+def latte():
+    if coffee["machine"]["water"] < coffee["latte"]["water"]:
+        print("Sorry, not enough water!")
+    elif coffee["machine"]["beans"] < coffee["latte"]["beans"]:
+        print("Sorry, not enough coffee beans!")
+    elif coffee["machine"]["milk"] < coffee["latte"]["milk"]:
+        print("Sorry, not enough milk!")
+    elif coffee["machine"]["cups"] < coffee["latte"]["cups"]:
+        print("Sorry, not enough disposable cups!")
+    else:
+        print("I have enough resources, making you a coffee!")
+        coffee["machine"]["water"] -= coffee["latte"]["water"]
+        coffee["machine"]["beans"] -= coffee["latte"]["beans"]
+        coffee["machine"]["milk"] -= coffee["latte"]["milk"]
+        coffee["machine"]["cups"] -= coffee["latte"]["cups"]
+        coffee["machine"]["money"] += coffee["latte"]["price"]
 
 
-def cappuccino(water, milk, beans, cups, money):
-    coffee["machine"]["water"] -= coffee["cappuccino"]["water"]
-    coffee["machine"]["beans"] -= coffee["cappuccino"]["beans"]
-    coffee["machine"]["milk"] -= coffee["cappuccino"]["milk"]
-    coffee["machine"]["cups"] -= coffee["cappuccino"]["cups"]
-    coffee["machine"]["money"] += coffee["cappuccino"]["price"]
-    return water, beans, milk, cups, money
+def cappuccino():
+    if coffee["machine"]["water"] < coffee["cappuccino"]["water"]:
+        print("Sorry, not enough water!")
+    elif coffee["machine"]["beans"] < coffee["cappuccino"]["beans"]:
+        print("Sorry, not enough coffee beans!")
+    elif coffee["machine"]["milk"] < coffee["cappuccino"]["milk"]:
+        print("Sorry, not enough milk!")
+    elif coffee["machine"]["cups"] < coffee["cappuccino"]["cups"]:
+        print("Sorry, not enough disposable cups!")
+    else:
+        print("I have enough resources, making you a coffee!")
+        coffee["machine"]["water"] -= coffee["cappuccino"]["water"]
+        coffee["machine"]["beans"] -= coffee["cappuccino"]["beans"]
+        coffee["machine"]["milk"] -= coffee["cappuccino"]["milk"]
+        coffee["machine"]["cups"] -= coffee["cappuccino"]["cups"]
+        coffee["machine"]["money"] += coffee["cappuccino"]["price"]
 
 
-def buy(water, milk, beans, cups, money):
+def buy():
     buy = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n")
     print(buy)
     if buy == "1":
-        espresso(water, milk, beans,cups, money)
+        leftover()
     elif buy == "2":
-        latte(water, milk, beans,cups, money)
+        latte()
     elif buy == "3":
-        cappuccino(water, milk, beans,cups, money)
+        cappuccino()
 
 
-def fill(water, milk, beans,cups):
+def fill():
     water_fill= int(input("Write how many ml of water do you want to add:\n"))
     milk_fill = int(input("Write how many ml of milk do you want to add:\n"))
     beans_fill = int(input("Write how many grams of coffee beans do you want to add:\n"))
     cups_fill = int(input("Write how many disposable cups of coffee do you want to add:\n"))
-    water += water_fill
-    milk += milk_fill
-    beans += beans_fill
-    cups += cups_fill
+    coffee["machine"]["water"] += water_fill
+    coffee["machine"]["milk"] += milk_fill
+    coffee["machine"]["beans"] += beans_fill
+    coffee["machine"]["cups"] += cups_fill
 
 
-def take(water, milk, beans, cups, money):
+
+def take(money):
     print("I gave you ${}".format(money))
-    money -= money
+    coffee["machine"]["money"] -= money
 
 
 def back():
@@ -100,13 +122,13 @@ while True:
     action = input("Write action (buy, fill, take, remaining, exit):\n")
 
     if action == "buy":
-        buy(water, milk, beans, cups, money)
+        buy()
         continue
     elif action == "fill":
-        fill(water, milk, beans, cups)
+        fill()
         continue
     elif action == "take":
-        take(water, milk, beans, cups, money)
+        take(money)
         continue
     elif action == "remaining":
         print(remaining(water, milk, beans, cups, money))
