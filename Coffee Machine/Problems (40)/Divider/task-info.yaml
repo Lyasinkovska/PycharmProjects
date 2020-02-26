@@ -1,0 +1,21 @@
+type: code
+files:
+- name: task.py
+  visible: true
+  text: |-
+    var = int(input())
+    if var % 7 == 0:
+        print("7")
+    else var % 5 == 0:
+        print("5")
+    elif var % 3 = 0:
+        print("3")
+    else:
+        if var % 2 == 0:
+            print("2")
+        else
+            print("Nothing")
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6532
+status: Solved
+record: -1
