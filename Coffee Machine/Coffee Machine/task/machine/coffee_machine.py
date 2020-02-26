@@ -84,7 +84,7 @@ def buy():
     buy = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:\n")
     print(buy)
     if buy == "1":
-        leftover()
+        espresso()
     elif buy == "2":
         latte()
     elif buy == "3":
