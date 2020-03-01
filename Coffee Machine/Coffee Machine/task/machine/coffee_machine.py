@@ -98,32 +98,30 @@ def take(money):
     coffee["machine"]["money"] -= money
 
 
-def back():
-    pass
+def coffee_machine():
+    while True:
+        water = coffee["machine"]["water"]
+        milk = coffee["machine"]["milk"]
+        beans = coffee["machine"]["beans"]
+        cups = coffee["machine"]["cups"]
+        money = coffee["machine"]["money"]
+
+        action = input("Write action (buy, fill, take, remaining, exit):\n")
+
+        if action == "buy":
+            buy()
+            continue
+        elif action == "fill":
+            fill()
+            continue
+        elif action == "take":
+            take(money)
+            continue
+        elif action == "remaining":
+            print(remaining(water, milk, beans, cups, money))
+            continue
+        elif action == "exit":
+            break
 
 
-while True:
-    water = coffee["machine"]["water"]
-    milk = coffee["machine"]["milk"]
-    beans = coffee["machine"]["beans"]
-    cups = coffee["machine"]["cups"]
-    money = coffee["machine"]["money"]
-
-    action = input("Write action (buy, fill, take, remaining, exit):\n")
-
-    if action == "buy":
-        buy()
-        continue
-    elif action == "fill":
-        fill()
-        continue
-    elif action == "take":
-        take(money)
-        continue
-    elif action == "remaining":
-        print(remaining(water, milk, beans, cups, money))
-        continue
-    elif action == "back":
-        back()
-    elif action == "exit":
-        break
+coffee_machine()

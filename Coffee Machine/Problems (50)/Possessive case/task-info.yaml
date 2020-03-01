@@ -1,0 +1,13 @@
+type: code
+files:
+- name: task.py
+  visible: true
+  text: |-
+    string1 = "someone"
+    string2 = "string"
+    # add the correct string instead of the dots
+    print(string1 + ... + string2)
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/5818
+status: Solved
+record: -1
