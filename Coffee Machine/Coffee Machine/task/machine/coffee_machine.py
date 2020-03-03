@@ -1,9 +1,4 @@
 # Write your code here
-'''print('Starting to make a coffee\nGrinding coffee beans'
-      '\nBoiling water\nMixing boiled water with crushed coffee '
-      'beans\nPouring coffee into the cup\nPouring some '
-      'milk into the cup\nCoffee is ready!')
-'''
 
 coffee = {"machine": {"water": 400, "milk": 540, "beans": 120, "cups": 9, "money": 550},
           "espresso": {"water": 250, "milk": 0, "beans": 16, "cups": 1, "price": 4},
