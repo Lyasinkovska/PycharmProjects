@@ -1,0 +1,14 @@
+type: code
+files:
+- name: task.py
+  visible: true
+  text: |-
+    import math
+
+
+    class Hexagon:
+        # create the methods here
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6937
+status: Solved
+record: -1
