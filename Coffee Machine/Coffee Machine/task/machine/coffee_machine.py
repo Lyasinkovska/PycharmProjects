@@ -78,5 +78,3 @@ class CoffeeMachine:
 
 
 my_coffee = CoffeeMachine()
-
-
