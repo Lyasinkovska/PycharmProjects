@@ -747,6 +747,9 @@ files:
     print("Pouring some milk into the cup")
     print("Coffee is ready!")
   learner_created: false
+- name: machine/coffee_machine_class.py
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/68/stages/371/implement
 status: Unchecked
 record: -1
