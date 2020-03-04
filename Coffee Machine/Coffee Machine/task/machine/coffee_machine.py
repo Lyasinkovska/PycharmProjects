@@ -16,7 +16,6 @@ class CoffeeMachine:
     def remaining(self):
         print(f"The coffee machine has:\n{self.water} of water\n{self.milk} of milk\n{self.beans} of coffee beans" \
                f"\n{self.cups} of disposable cups\n{self.money} of money")
-        self.make_coffee()
 
     def resources(self, variant):
         if self.water < self.coffee_ingredients_needed[variant]["water"]:
@@ -34,7 +33,6 @@ class CoffeeMachine:
             self.milk -= self.coffee_ingredients_needed[variant]["milk"]
             self.cups -= self.coffee_ingredients_needed[variant]["cups"]
             self.money += self.coffee_ingredients_needed[variant]["price"]
-            self.buy()
 
     def buy(self):
         variant = self.ask_user("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - go back:\n")
@@ -52,12 +50,10 @@ class CoffeeMachine:
         self.milk += int(self.ask_user("Write how many ml of milk do you want to add:\n"))
         self.beans += int(self.ask_user("Write how many grams of coffee beans do you want to add:\n"))
         self.cups += int(self.ask_user("Write how many disposable cups of coffee do you want to add:\n"))
-        self.make_coffee()
 
     def take(self, money):
         print("I gave you ${}".format(money))
         self.money -= money
-        self.make_coffee()
 
     def ask_user(self, action):
         return input(action)
@@ -67,7 +63,7 @@ class CoffeeMachine:
             action = self.ask_user("Write action (buy, fill, take, remaining, exit):\n")
             if action == "buy":
                 self.buy()
-
+                continue
             elif action == "fill":
                 self.fill()
                 continue
@@ -78,7 +74,7 @@ class CoffeeMachine:
                 self.remaining()
                 continue
             elif action == "exit":
-                quit()
+                break
 
 
 my_coffee = CoffeeMachine()

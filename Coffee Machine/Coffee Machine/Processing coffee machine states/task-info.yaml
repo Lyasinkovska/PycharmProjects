@@ -750,6 +750,9 @@ files:
 - name: machine/coffee_machine_class.py
   visible: true
   learner_created: true
+- name: machine/draft.py
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/68/stages/371/implement
-status: Failed
+status: Solved
 record: -1
