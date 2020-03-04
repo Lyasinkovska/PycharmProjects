@@ -8,7 +8,7 @@
 
 def remaining(water, milk, beans, cups, money):
     return "The coffee machine has:\n{} of water\n{} of milk\n{} of coffee beans" \
-                "\n{} of disposable cups\n{} of money".format(water, milk, beans, cups, money)
+           "\n{} of disposable cups\n{} of money".format(water, milk, beans, cups, money)
 
 
 def resources(kind):
@@ -30,7 +30,7 @@ def resources(kind):
 
 
 def buy():
-    buy = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - go back:\n")
+    buy = ask_user("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - go back:\n")
     if buy == "1":
         resources("espresso")
     elif buy == "2":
@@ -42,10 +42,10 @@ def buy():
 
 
 def fill():
-    water = int(input("Write how many ml of water do you want to add:\n"))
-    milk = int(input("Write how many ml of milk do you want to add:\n"))
-    beans = int(input("Write how many grams of coffee beans do you want to add:\n"))
-    cups = int(input("Write how many disposable cups of coffee do you want to add:\n"))
+    water = int(ask_user("Write how many ml of water do you want to add:\n"))
+    milk = int(ask_user("Write how many ml of milk do you want to add:\n"))
+    beans = int(ask_user("Write how many grams of coffee beans do you want to add:\n"))
+    cups = int(ask_user("Write how many disposable cups of coffee do you want to add:\n"))
     coffee["machine"]["water"] += water
     coffee["machine"]["milk"] += milk
     coffee["machine"]["beans"] += beans
@@ -57,6 +57,10 @@ def take(money):
     coffee["machine"]["money"] -= money
 
 
+def ask_user(message):
+    return input(message)
+
+
 def coffee_machine():
     while True:
         water = coffee["machine"]["water"]
@@ -65,7 +69,7 @@ def coffee_machine():
         cups = coffee["machine"]["cups"]
         money = coffee["machine"]["money"]
 
-        action = input("Write action (buy, fill, take, remaining, exit):\n")
+        action = ask_user("Write action (buy, fill, take, remaining, exit):\n")
 
         if action == "buy":
             buy()
