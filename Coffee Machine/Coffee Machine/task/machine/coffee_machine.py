@@ -1,4 +1,4 @@
-coffee = {
+'''coffee = {
     "machine": {"water": 400, "milk": 540, "beans": 120, "cups": 9, "money": 550},
     "espresso": {"water": 250, "milk": 0, "beans": 16, "cups": 1, "price": 4},
     "latte": {"water": 350, "milk": 75, "beans": 20, "cups": 1, "price": 7},
@@ -83,4 +83,10 @@ def coffee_machine():
             break
 
 
-coffee_machine()
+coffee_machine()'''
+
+from coffee_machine_class import CoffeeMachine
+
+my_coffee = CoffeeMachine()
+
+
