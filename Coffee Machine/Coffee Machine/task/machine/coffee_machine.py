@@ -1,38 +1,32 @@
 class CoffeeMachine:
-    coffee_ingredients_needed = {
-        "espresso": {"water": 250, "milk": 0, "beans": 16, "cups": 1, "price": 4},
-        "latte": {"water": 350, "milk": 75, "beans": 20, "cups": 1, "price": 7},
-        "cappuccino": {"water": 200, "milk": 100, "beans": 12, "cups": 1, "price": 6}
-    }
 
     def __init__(self):
-        self.water = 400
-        self.milk = 540
-        self.beans = 120
-        self.cups = 9
-        self.money = 550
+        self.coffee_ingredients_needed = {
+            "espresso": {"water": 250, "milk": 0, "beans": 16, "cups": 1, "money": 4},
+            "latte": {"water": 350, "milk": 75, "beans": 20, "cups": 1, "money": 7},
+            "cappuccino": {"water": 200, "milk": 100, "beans": 12, "cups": 1, "money": 6}
+        }
+
+        self.machine_resources = {"water": 400, "milk": 540, "beans": 120, "cups": 9, "money": 550
+                                  }
         self.make_coffee()
 
     def remaining(self):
-        print(f"The coffee machine has:\n{self.water} of water\n{self.milk} of milk\n{self.beans} of coffee beans" \
-               f"\n{self.cups} of disposable cups\n{self.money} of money")
+        print("The coffee machine has:\n{} of water\n{} of milk\n{} of coffee beans\n{} of disposable cups\n"
+              "{} of money".format(self.machine_resources["water"],
+                                   self.machine_resources["milk"],
+                                   self.machine_resources["beans"],
+                                   self.machine_resources["cups"],
+                                   self.machine_resources["money"]))
 
-    def resources(self, variant):
-        if self.water < self.coffee_ingredients_needed[variant]["water"]:
-            print("Sorry, not enough water!")
-        elif self.beans < self.coffee_ingredients_needed[variant]["beans"]:
-            print("Sorry, not enough coffee beans!")
-        elif self.milk < self.coffee_ingredients_needed[variant]["milk"]:
-            print("Sorry, not enough milk!")
-        elif self.cups < self.coffee_ingredients_needed[variant]["cups"]:
-            print("Sorry, not enough disposable cups!")
-        else:
-            print("I have enough resources, making you a coffee!")
-            self.water -= self.coffee_ingredients_needed[variant]["water"]
-            self.beans -= self.coffee_ingredients_needed[variant]["beans"]
-            self.milk -= self.coffee_ingredients_needed[variant]["milk"]
-            self.cups -= self.coffee_ingredients_needed[variant]["cups"]
-            self.money += self.coffee_ingredients_needed[variant]["price"]
+    def resources(self, coffee_variant):
+        for ingredient in self.coffee_ingredients_needed[coffee_variant].keys():
+            if self.machine_resources[ingredient] < self.coffee_ingredients_needed[coffee_variant][ingredient]:
+                print("Sorry, not enough {}!".format(ingredient))
+            else:
+                self.machine_resources[ingredient] -= self.coffee_ingredients_needed[coffee_variant][ingredient]
+                self.machine_resources["money"] += self.coffee_ingredients_needed[coffee_variant]["money"]
+                print("I have enough resources, making you a coffee!")
 
     def buy(self):
         variant = self.ask_user("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - go back:\n")
@@ -46,14 +40,16 @@ class CoffeeMachine:
             self.make_coffee()
 
     def fill(self):
-        self.water += int(self.ask_user("Write how many ml of water do you want to add:\n"))
-        self.milk += int(self.ask_user("Write how many ml of milk do you want to add:\n"))
-        self.beans += int(self.ask_user("Write how many grams of coffee beans do you want to add:\n"))
-        self.cups += int(self.ask_user("Write how many disposable cups of coffee do you want to add:\n"))
+        self.machine_resources["water"] += int(self.ask_user("Write how many ml of water do you want to add:\n"))
+        self.machine_resources["milk"] += int(self.ask_user("Write how many ml of milk do you want to add:\n"))
+        self.machine_resources["beans"] += int(self.ask_user("Write how many grams of coffee beans do you want "
+                                                             "to add:\n"))
+        self.machine_resources["cups"] += int(self.ask_user("Write how many disposable cups of coffee do you want "
+                                                            "to add:\n"))
 
-    def take(self, money):
-        print("I gave you ${}".format(money))
-        self.money -= money
+    def take(self):
+        print("I gave you ${}".format(self.machine_resources["money"]))
+        self.machine_resources["money"] = 0
 
     def ask_user(self, action):
         return input(action)
@@ -68,7 +64,7 @@ class CoffeeMachine:
                 self.fill()
                 continue
             elif action == "take":
-                self.take(self.money)
+                self.take()
                 continue
             elif action == "remaining":
                 self.remaining()
