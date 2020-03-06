@@ -7,8 +7,11 @@ class CoffeeMachine:
             "cappuccino": {"water": 200, "milk": 100, "beans": 12, "cups": 1, "money": 6}
         }
 
-        self.machine_resources = {"water": 400, "milk": 540, "beans": 120, "cups": 9, "money": 550
-                                  }
+        self.machine_money = 550
+
+        self.machine_resources = {
+            "water": 400, "milk": 540, "beans": 120, "cups": 9
+        }
         self.make_coffee()
 
     def remaining(self):
@@ -17,16 +20,25 @@ class CoffeeMachine:
                                    self.machine_resources["milk"],
                                    self.machine_resources["beans"],
                                    self.machine_resources["cups"],
-                                   self.machine_resources["money"]))
+                                   self.machine_money))
+
+    def check_if_enough_resources(self, coffee_variant):
+        is_enough_resources = True
+        for ingredient in self.machine_resources.keys():
+            if self.machine_resources[ingredient] < self.coffee_ingredients_needed[coffee_variant][ingredient]:
+                is_enough_resources = False
+                print("Sorry, not enough {}!".format(ingredient))
+        return is_enough_resources
+
+    def decrease_resources(self, coffee_variant):
+        for ingredient in self.machine_resources.keys():
+            self.machine_resources[ingredient] -= self.coffee_ingredients_needed[coffee_variant][ingredient]
 
     def resources(self, coffee_variant):
-        for ingredient in self.coffee_ingredients_needed[coffee_variant].keys():
-            if self.machine_resources[ingredient] < self.coffee_ingredients_needed[coffee_variant][ingredient]:
-                print("Sorry, not enough {}!".format(ingredient))
-            else:
-                self.machine_resources[ingredient] -= self.coffee_ingredients_needed[coffee_variant][ingredient]
-                self.machine_resources["money"] += self.coffee_ingredients_needed[coffee_variant]["money"]
-                print("I have enough resources, making you a coffee!")
+        if self.check_if_enough_resources(coffee_variant):
+            print("I have enough resources, making you a coffee!")
+            self.decrease_resources(coffee_variant)
+            self.machine_money += self.coffee_ingredients_needed[coffee_variant]["money"]
 
     def buy(self):
         variant = self.ask_user("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, 4 - go back:\n")
@@ -48,8 +60,8 @@ class CoffeeMachine:
                                                             "to add:\n"))
 
     def take(self):
-        print("I gave you ${}".format(self.machine_resources["money"]))
-        self.machine_resources["money"] = 0
+        print("I gave you ${}".format(self.machine_money))
+        self.machine_money = 0
 
     def ask_user(self, action):
         return input(action)
