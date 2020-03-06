@@ -183,8 +183,10 @@ files:
   learner_created: false
 - name: tictactoe/tictactoe.py
   visible: true
-  text: '# write your code here'
+  text: |
+    # write your code here
+    print("X O X\nO X X\nO O X")
   learner_created: false
 feedback_link: https://hyperskill.org/projects/73/stages/400/implement
 status: Failed
-record: -1
+record: 1

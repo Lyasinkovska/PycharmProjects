@@ -325,7 +325,11 @@ files:
   learner_created: false
 - name: tictactoe/tictactoe.py
   visible: true
-  text: '# write your code here'
+  text: "# write your code here\ndata = input(\"Enter yor cells: \")  # .replace(u'\\\
+    xa0', u'_')\n#data = \"O_OXXO_XX\"\ncells = []\nfor elem in data:\n\tcells.append(elem)\n\
+    \nfield = \"---------\\n| {} {} {} |\\n| {} {} {} |\\n| {} {} {} |\\n---------\
+    \ \" \\\n\t.format(cells[0], cells[1], cells[2], cells[3], cells[4], cells[5],\
+    \ cells[6], cells[7], cells[8])\n\n\nprint(field)\n\n\n"
   learner_created: false
 feedback_link: https://hyperskill.org/projects/73/stages/403/implement
 status: Unchecked

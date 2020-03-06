@@ -23,7 +23,7 @@ class CoffeeMachine:
                                    self.machine_money))
 
     def check_if_enough_resources(self, coffee_variant):
-        is_enough_resources = True
+        is_enough_x`resources = True
         for ingredient in self.machine_resources.keys():
             if self.machine_resources[ingredient] < self.coffee_ingredients_needed[coffee_variant][ingredient]:
                 is_enough_resources = False
