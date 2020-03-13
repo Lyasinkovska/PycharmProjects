@@ -37,6 +37,9 @@ files:
   text: |
     print('Hello, World!')
   learner_created: false
+- name: translator/draft.py
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/99/stages/544/implement
 status: Unchecked
 record: -1
