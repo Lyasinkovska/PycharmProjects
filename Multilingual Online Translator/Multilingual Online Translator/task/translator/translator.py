@@ -51,11 +51,21 @@ web_byte = urlopen(req).read()
 web_page = web_byte.decode('utf-8')
 soup = BeautifulSoup(web_byte, 'html.parser')
 
-translations_with_examples = soup.find_all(['div', 'a'],  {'class': ['translation']})
+translations = soup.find_all(['div', 'a'],  {'class': ['translation']})
 only_words = []
-for tag in translations_with_examples:
+for tag in translations:
 	only_words.append(tag.text.replace('\n', '').strip())
 print(only_words)
+
+translations_with_examples = soup.find_all(['div', 'a'],  {'class': ['example']})
+example_words = []
+for tag in translations_with_examples:
+	examples = tag.text.replace('\n', '').strip().split(10*' ')
+	for ex in examples:
+		example_words.append(ex)
+print(example_words)
+
+
 
 #document.querySelector('#translations-content').querySelectorAll('a').forEach(el=>console.log(el.innerText))
 #document.querySelector('#examples-content').querySelectorAll('.text').forEach(el=>console.log(el.innerText))

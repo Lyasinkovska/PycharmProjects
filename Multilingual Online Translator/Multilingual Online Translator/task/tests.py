@@ -2,6 +2,12 @@ from hstest.stage_test import StageTest
 from hstest.test_case import TestCase
 from hstest.check_result import CheckResult
 
+import sys
+if sys.platform.startswith("win"):
+    import _locale
+    # pylint: disable=protected-access
+    _locale._getdefaultlocale = (lambda *args: ['en_US', 'utf8'])
+
 CheckResult.correct = lambda: CheckResult(True, '')
 CheckResult.wrong = lambda feedback: CheckResult(False, feedback)
 
