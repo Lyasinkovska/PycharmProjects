@@ -9,8 +9,11 @@ files:
     from hstest.check_result import CheckResult
 
     import sys
+    import os
+
     if sys.platform.startswith("win"):
         import _locale
+
         # pylint: disable=protected-access
         _locale._getdefaultlocale = (lambda *args: ['en_US', 'utf8'])
 
@@ -24,22 +27,32 @@ files:
 
         def check(self, reply, attach):
             reply = reply.lower()
-            if not ('arabic translations' in reply
-                    and 'arabic examples' in reply
-                    and 'russian examples' in reply
-                    and 'russian translations' in reply):
-                return CheckResult.wrong('Try to print out translations and examples of all available languages. ')
 
-            with open('hello.txt') as file:
+            if 'arabic translations' not in reply:
+                return CheckResult.wrong("There are no \'Arabic translations\' in your output!")
+            if 'arabic examples' not in reply:
+                return CheckResult.wrong("There are no \'Arabic examples\' in your output!")
+            if 'russian translations' not in reply:
+                return CheckResult.wrong("There are no \'Russian translations\' in your output!")
+            if 'russian examples' not in reply:
+                return CheckResult.wrong("There are no \'Russian examples\' in your output!")
+
+            file_name = 'hello.txt'
+
+            if not os.path.exists(file_name):
+                return CheckResult.wrong(
+                    "Looks like you didn't create a file named WORD.txt where WORD is word you want to translate.")
+
+            with open(file_name) as file:
                 output = file.read().lower()
-                if ('spanish translation' in output
-                        and 'spanish example' in output
-                        and 'turkish example' in output):
-                    return CheckResult.correct()
+                if 'spanish translation' not in output:
+                    return CheckResult.wrong("There are no \'Spanish translations\' in the output file!")
+                if 'spanish example' not in output:
+                    return CheckResult.wrong("There are no \'Spanish examples\' in the output file!")
+                if 'turkish example' not in output:
+                    return CheckResult.wrong("There are no \'Turkish examples\' in the output file!")
 
-            return CheckResult.wrong(
-                'Try to write all translations and examples into the output file '
-                'and name it WORD.txt where WORD is word you want to translate.')
+            return CheckResult.correct()
 
 
     if __name__ == '__main__':

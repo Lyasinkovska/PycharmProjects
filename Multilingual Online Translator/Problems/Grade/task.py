@@ -1,3 +1,4 @@
+#  Posted from EduTools plugin
 grade = int(input())
 maximum = int(input())
 result = grade/maximum*100

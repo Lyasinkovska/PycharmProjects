@@ -2,6 +2,7 @@ hyperskill_project:
   id: 99
   ide_files: https://stepik.org/media/attachments/lesson/311846/additional_files.json
   is_template_based: false
+  use_ide: true
 stages:
 - id: 543
   step: 8970
@@ -43,16 +44,16 @@ topics:
     theory_id: 5979
   - title: Invoking a function
     theory_id: 5891
-  - title: Taking input
-    theory_id: 5913
-  - title: Program with numbers
-    theory_id: 5872
   - title: Declaring a function
     theory_id: 5900
   - title: Scopes
     theory_id: 6322
   - title: Arguments
     theory_id: 7248
+  - title: Taking input
+    theory_id: 5913
+  - title: Program with numbers
+    theory_id: 5872
   - title: Comparisons
     theory_id: 5920
   - title: If statement
@@ -60,6 +61,14 @@ topics:
   1:
   - title: World Wide Web
     theory_id: 6633
+  - title: HyperText Transfer Protocol
+    theory_id: 6569
+  - title: HTTP URL
+    theory_id: 6740
+  - title: HTTP messages
+    theory_id: 6752
+  - title: XML
+    theory_id: 6901
   - title: IDE
     theory_id: 3805
   - title: Quotes and multi-line strings
@@ -84,6 +93,20 @@ topics:
     theory_id: 6057
   - title: Packages
     theory_id: 6384
+  - title: Introduction to operating systems
+    theory_id: 9704
+  - title: Command line overview
+    theory_id: 8977
+  - title: Parameters and options
+    theory_id: 9746
+  - title: Pip
+    theory_id: 6230
+  - title: 'Requests: retrieving data'
+    theory_id: 8603
+  - title: 'Requests: manipulating data'
+    theory_id: 8681
+  - title: BeautifulSoup
+    theory_id: 10209
   - title: HTML basics
     theory_id: 6434
   - title: Tags and attributes
@@ -94,12 +117,14 @@ topics:
     theory_id: 7271
   - title: Inline Elements
     theory_id: 7518
-  - title: Connecting CSS to HTML
-    theory_id: 7418
   - title: HTML attributes id and class
     theory_id: 7527
+  - title: Comments
+    theory_id: 7502
   - title: What is CSS
     theory_id: 7678
+  - title: Connecting CSS to HTML
+    theory_id: 7418
   - title: Basic syntax
     theory_id: 7722
   - title: CSS Selectors
@@ -107,20 +132,26 @@ topics:
   - title: PyCharm basics
     theory_id: 6193
   2:
+  - title: Computer programming
+    theory_id: 8739
+  - title: Intro to computational thinking
+    theory_id: 8742
+  - title: Components of computational thinking
+    theory_id: 8745
   - title: Escape sequences
     theory_id: 7130
   - title: Indexes
     theory_id: 6189
   - title: Slicing
     theory_id: 6177
+  - title: Functional decomposition
+    theory_id: 9571
   3:
   - title: Operations with list
     theory_id: 6031
   - title: While loop
     theory_id: 5940
   5:
-  - title: Command line overview
-    theory_id: 8977
   - title: Type casting
     theory_id: 6224
   - title: Command line arguments
@@ -134,3 +165,12 @@ topics:
     theory_id: 6042
   - title: Exception handling
     theory_id: 6270
+  4:
+  - title: Files
+    theory_id: 6989
+  - title: Files in Python
+    theory_id: 8691
+  - title: Reading files
+    theory_id: 8139
+  - title: Writing files
+    theory_id: 8334

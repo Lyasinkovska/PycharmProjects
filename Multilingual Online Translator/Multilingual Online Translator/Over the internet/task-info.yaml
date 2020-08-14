@@ -28,7 +28,10 @@ files:
             if '200 OK' not in reply:
                 return CheckResult.wrong("There isn't internet connection identificator.")
 
-            if reply.count('[') == 2 and 'Translation' in reply:
+            print(reply.count('['))
+            print('Translation' in reply)
+
+            if reply.count('[') >= 2 and 'Translation' in reply:
                 return CheckResult.correct()
 
             return CheckResult.wrong("Try to print lists of translations in both "
@@ -38,14 +41,14 @@ files:
     if __name__ == '__main__':
         TranslatorTest('translator.translator').run_tests()
   learner_created: false
+- name: translator/draft.py
+  visible: true
+  learner_created: true
 - name: translator/translator.py
   visible: true
   text: |
     print('Hello, World!')
   learner_created: false
-- name: translator/draft.py
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/projects/99/stages/544/implement
-status: Unchecked
+status: Failed
 record: -1

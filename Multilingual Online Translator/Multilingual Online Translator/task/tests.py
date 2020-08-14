@@ -22,7 +22,10 @@ class TranslatorTest(StageTest):
         if '200 OK' not in reply:
             return CheckResult.wrong("There isn't internet connection identificator.")
 
-        if reply.count('[') == 2 and 'Translation' in reply:
+        print(reply.count('['))
+        print('Translation' in reply)
+
+        if reply.count('[') >= 2 and 'Translation' in reply:
             return CheckResult.correct()
 
         return CheckResult.wrong("Try to print lists of translations in both "
