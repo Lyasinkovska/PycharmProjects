@@ -29,13 +29,12 @@ class Account:
 		random.seed(random.random())
 		return random.sample(range(1000, 9999), 1)[0]
 
-
 	def account_creation(self):
 		card_number = self.card_number_generation()
 		pin = self.pin_generation()
 		self.add_credentials(pin, card_number)
-		print("Your card has been created\nYour card number:\n{}\nYour card PIN:\n{}"\
-			.format(card_number, pin))
+		print("Your card has been created\nYour card number:\n{}\nYour card PIN:\n{}" \
+			  .format(card_number, pin))
 
 	def add_credentials(self, pin, card_number):
 		self.credentials[card_number] = pin
@@ -44,7 +43,6 @@ class Account:
 		input_card_number = int(self.user_choice('Enter your card number:\n'))
 		input_pin = int(self.user_choice("Enter your PIN:\n"))
 		self.verification(input_card_number, input_pin)
-
 
 	def balance(self):
 		self.balance = 0
@@ -69,10 +67,7 @@ class Account:
 					self.exit()
 					break
 		else:
-				print("Wrong card number or PIN!\n")
-
-
-
+			print("Wrong card number or PIN!\n")
 
 	def choice(self):
 		while True:
