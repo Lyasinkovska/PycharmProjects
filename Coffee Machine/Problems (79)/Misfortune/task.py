@@ -1,3 +1,4 @@
+#  Posted from EduTools plugin
 def square_odds(a, b):
     start = a
     if a % 2 == 0:
@@ -8,10 +9,10 @@ def square_odds(a, b):
 
 
 # from 22 to 42
-square_odds(a=22, 42)
+square_odds(22, 42)
 
 # from 15 to 31
-square_odds(b=15, a=31)
+square_odds(a=15, b=31)
 
 # from 42 to 49
-square_odds(49, a=42)
+square_odds(42, 49)

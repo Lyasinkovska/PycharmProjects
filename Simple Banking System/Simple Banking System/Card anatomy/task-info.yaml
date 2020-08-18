@@ -154,6 +154,43 @@ files:
   text: |
     # Write your code here
   learner_created: false
+- name: banking/banking_draft.py
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/109/stages/591/implement
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #2
+
+    There is no 'successfully' in your output after signing in with correct credentials
+
+    Please find below the output of your program during this failed test.
+    Note that the '>' character indicates the beginning of the input line.
+
+    ---
+
+    1. Create an account
+    2. Log into account
+    0. Exit
+    > 1
+    Your card has been created
+    Your card number:
+    40000019824217278
+    Your card PIN:
+    5794
+    1. Create an account
+    2. Log into account
+    0. Exit
+    > 2
+    Enter your card number:
+    > 4000001982421727
+    Enter your PIN:
+    > 5794
+    Wrong card number or PIN!
+
+    1. Create an account
+    2. Log into account
+    0. Exit
+  time: Mon, 17 Aug 2020 15:35:40 UTC
 record: -1
