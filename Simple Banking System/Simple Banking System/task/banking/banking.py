@@ -9,17 +9,20 @@ class Account:
         self.credentials = dict()
         self.choice()
 
-    def user_choice(self, action):
+    @staticmethod
+    def user_choice(action):
         user_input = input(action)
         if user_input.isnumeric():
             return int(user_input)
 
-    def card_number_generation(self):
+    @staticmethod
+    def card_number_generation():
         random.seed(random.random())
         iin = "400000"
         return int(iin + str(random.sample(range(1000000000, 9999999999), 1)[0]))
 
-    def pin_generation(self):
+    @staticmethod
+    def pin_generation():
         random.seed(random.random())
         return random.sample(range(1000, 9999), 1)[0]
 
@@ -38,10 +41,12 @@ class Account:
         input_pin = self.user_choice("Enter your PIN:\n")
         self.verification(input_card_number, input_pin)
 
-    def balance(self, balance):
+    @staticmethod
+    def balance(balance):
         print(f"Balance: {balance}\n")
 
-    def exit(self):
+    @staticmethod
+    def exit():
         print("Bye!")
         quit()
 
