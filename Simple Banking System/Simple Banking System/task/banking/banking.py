@@ -38,9 +38,8 @@ class Account:
         input_pin = self.user_choice("Enter your PIN:\n")
         self.verification(input_card_number, input_pin)
 
-    def balance(self):
-        self.balance = 0
-        print(f"Balance: {self.balance}\n")
+    def balance(self, balance):
+        print(f"Balance: {balance}\n")
 
     def exit(self):
         print("Bye!")
@@ -52,7 +51,7 @@ class Account:
             while True:
                 action = self.user_choice(self.second_level_menu)
                 if action == 1:
-                    self.balance()
+                    self.balance(0)
                     continue
                 elif action == 2:
                     print("You have successfully logged out!\n")
