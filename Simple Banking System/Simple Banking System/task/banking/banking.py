@@ -1,23 +1,20 @@
 import random
 
 
-class CardCredentials:
-
-	def __init__(self, card_number, pin):
-		self.card_number = card_number
-		self.pin = pin
-
-
 class Account:
 
 	def __init__(self):
-		self.menu = ["1. Create an account\n2. Log into account\n0. Exit\n","1. Balance\n2. Log out\n0. Exit\n"]
+		self.first_level_menu = "1. Create an account\n2. Log into account\n0. Exit\n"
+		self.second_level_menu = "1. Balance\n2. Log out\n0. Exit\n"
 		self.credentials = dict()
 		self.choice()
 
-
 	def user_choice(self, action):
-		return int(input(action))
+		user_input = input(action)
+		if user_input.isnumeric():
+			return int(user_input)
+		else:
+			print("Wrong card number or PIN!\n")
 
 	def credentials(self):
 		self.credentials[self.card_number] = self.pin
@@ -26,40 +23,42 @@ class Account:
 	def card_number_generation(self):
 		random.seed(random.random())
 		iin = "400000"
-		self.card_number = int(iin + str(random.sample(range(00000000000, 99999999999),1)[0]))
-		return self.card_number
+		return int(iin + str(random.sample(range(1000000000, 9999999999), 1)[0]))
 
 	def pin_generation(self):
 		random.seed(random.random())
-		self.pin = random.sample(range(0000, 9999),1)[0]
-		return self.pin
-
-	def add_credentials(self):
-		self.credentials[self.card_number] = self.pin
+		return random.sample(range(1000, 9999), 1)[0]
 
 
 	def account_creation(self):
-		self.card_number = self.card_number_generation()
-		self.pin = self.pin_generation()
-
+		card_number = self.card_number_generation()
+		pin = self.pin_generation()
+		self.add_credentials(pin, card_number)
 		print("Your card has been created\nYour card number:\n{}\nYour card PIN:\n{}"\
-			.format(self.card_number, self.pin))
+			.format(card_number, pin))
+
+	def add_credentials(self, pin, card_number):
+		self.credentials[card_number] = pin
 
 	def log_in(self):
-		self.input_card_number = self.user_choice("Enter your card number:\n")
-		self.input_pin = self.user_choice("Enter your PIN:\n")
-		self.verification()
+		input_card_number = int(self.user_choice('Enter your card number:\n'))
+		input_pin = int(self.user_choice("Enter your PIN:\n"))
+		self.verification(input_card_number, input_pin)
+
 
 	def balance(self):
 		self.balance = 0
 		print(f"Balance: {self.balance}\n")
 
-	def verification(self):
+	def exit(self):
+		print("Bye!")
+		quit()
 
-		if self.input_pin in self.credentials.values(): #and self.credentials[self.input_card_number] == self.input_pin:
+	def verification(self, input_card_number, input_pin):
+		if input_pin in self.credentials.values() and self.credentials[input_card_number] == input_pin:
 			print("You have successfully logged in!\n")
 			while True:
-				action = self.user_choice(self.menu[1])
+				action = self.user_choice(self.second_level_menu)
 				if action == 1:
 					self.balance()
 					continue
@@ -67,26 +66,27 @@ class Account:
 					print("You have successfully logged out!\n")
 					break
 				elif action == 0:
-					print("Bye!")
-					exit()
+					self.exit()
+					break
 		else:
+				print("Wrong card number or PIN!\n")
 
-			print("Wrong card number or PIN!\n")
+
+
 
 	def choice(self):
 		while True:
-			action = self.user_choice(self.menu[0])
+			action = self.user_choice(self.first_level_menu)
 
 			if action == 1:
 				self.account_creation()
-				self.add_credentials()
 				print(self.credentials)
 
 			elif action == 2:
 				self.log_in()
 
 			elif action == 0:
-				exit()
+				self.exit()
 
 
 my_account = Account()
