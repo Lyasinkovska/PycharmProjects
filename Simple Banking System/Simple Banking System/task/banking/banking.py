@@ -14,13 +14,9 @@ class Account:
         user_input = input(action)
         return user_input.isnumeric() and int(user_input)
 
-    @staticmethodK
-    def card_number_generation():
-
-        random.seed(random.random())
-        iin = "400000"
-        init_card_number = iin + str(random.sample(range(100000000, 999999999), 1)[0])
-        luhn_card_1 = [int(digit) * 2 for digit in init_card_number[::2]] + [int(digit) for digit in init_card_number[1::2]]
+    def luhn_algorithm(self, init_card_number):
+        luhn_card_1 = [int(digit) * 2 for digit in init_card_number[::2]] + [int(digit) for digit in
+                                                                             init_card_number[1::2]]
         luhn_card_2 = [(digit - 9) if digit > 9 else digit for digit in luhn_card_1]
         if sum(luhn_card_2) % 10 == 0:
             last_digit = 0
@@ -28,6 +24,11 @@ class Account:
             last_digit = (sum(luhn_card_2) // 10 + 1) * 10 - sum(luhn_card_2)
         return int(init_card_number + str(last_digit))
 
+    def card_number_generation(self):
+        random.seed(random.random())
+        iin = "400000"
+        init_card_number = iin + str(random.sample(range(100000000, 999999999), 1)[0])
+        return self.luhn_algorithm(init_card_number)
 
     @staticmethod
     def pin_generation():
