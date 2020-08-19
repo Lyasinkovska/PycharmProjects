@@ -158,46 +158,9 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/109/stages/591/implement
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Exception in test #4
-
-    Traceback (most recent call last):
-      File "banking.py", line 92, in <module>
-        my_account = Account()
-      File "banking.py", line 10, in __init__
-        self.choice()
-      File "banking.py", line 86, in choice
-        self.log_in()
-      File "banking.py", line 46, in log_in
-        self.verification(input_card_number, input_pin)
-      File "banking.py", line 58, in verification
-        if input_pin in self.credentials.values() and self.credentials[input_card_number] == input_pin:
-    KeyError: 4000009548116135
-
-    Please find below the output of your program during this failed test.
-    Note that the '>' character indicates the beginning of the input line.
-
-    ---
-
-    1. Create an account
-    2. Log into account
-    0. Exit
-    > 1
-    Your card has been created
-    Your card number:
-    4000007110662893
-    Your card PIN:
-    9481
-    {4000007110662893: 9481}
-    1. Create an account
-    2. Log into account
-    0. Exit
-    > 2
-    Enter your card number:
-    > 4000009548116135
-    Enter your PIN:
-    > 9481
-  time: Tue, 18 Aug 2020 12:26:55 UTC
-record: -1
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/109/stages/591/implement">JetBrains
+    Academy</a>
+  time: Tue, 18 Aug 2020 16:50:18 UTC
+record: 1

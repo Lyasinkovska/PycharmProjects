@@ -188,6 +188,17 @@ files:
     if __name__ == '__main__':
         BankingSystem('banking.banking').run_tests()
   learner_created: false
+- name: banking/banking_draft.py
+  visible: true
+  text: |-
+    import random
+
+    print(random.sample(range(100), 1)[0])  # [24, 33, 91]
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/109/stages/592/implement
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/109/stages/592/implement">JetBrains
+    Academy</a>
+  time: Wed, 19 Aug 2020 15:00:15 UTC
 record: -1

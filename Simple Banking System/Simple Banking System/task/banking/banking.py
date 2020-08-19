@@ -12,14 +12,22 @@ class Account:
     @staticmethod
     def user_choice(action):
         user_input = input(action)
-        if user_input.isnumeric():
-            return int(user_input)
+        return user_input.isnumeric() and int(user_input)
 
-    @staticmethod
+    @staticmethodK
     def card_number_generation():
+
         random.seed(random.random())
         iin = "400000"
-        return int(iin + str(random.sample(range(1000000000, 9999999999), 1)[0]))
+        init_card_number = iin + str(random.sample(range(100000000, 999999999), 1)[0])
+        luhn_card_1 = [int(digit) * 2 for digit in init_card_number[::2]] + [int(digit) for digit in init_card_number[1::2]]
+        luhn_card_2 = [(digit - 9) if digit > 9 else digit for digit in luhn_card_1]
+        if sum(luhn_card_2) % 10 == 0:
+            last_digit = 0
+        else:
+            last_digit = (sum(luhn_card_2) // 10 + 1) * 10 - sum(luhn_card_2)
+        return int(init_card_number + str(last_digit))
+
 
     @staticmethod
     def pin_generation():
@@ -51,7 +59,7 @@ class Account:
         quit()
 
     def verification(self, input_card_number, input_pin):
-        if input_pin in self.credentials.values() and self.credentials[input_card_number] == input_pin:
+        if input_card_number in self.credentials and self.credentials[input_card_number] == input_pin:
             print("You have successfully logged in!\n")
             while True:
                 action = self.user_choice(self.second_level_menu)
