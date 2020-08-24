@@ -1,4 +1,33 @@
 import random
+import sqlite3
+
+import self as self
+
+
+class CardDataBase:
+
+    def __init__(self):
+        self.connection = sqlite3.connect ("card.s3db")
+        self.cursor = self.connection.cursor()
+
+    def cursor_creation(self, card_number, pin):
+        self.data_insertion(self.cursor, card_number, pin)
+        self.connection.commit()
+        #connection.close()
+
+    def data_insertion(self, cursor, card_number, pin):
+
+        cursor.execute("""CREATE TABLE IF NOT EXISTS card
+                                            (
+                                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                            number TEXT,
+                                            pin TEXT,
+                                            balance INTEGER DEFAULT 0
+                                            )"""
+        )
+
+        cursor.execute("""INSERT INTO card ( number, pin, balance)  VALUES (?,?,?);""", (str(card_number), (pin), 0))
+
 
 
 class Account:
@@ -7,7 +36,9 @@ class Account:
         self.first_level_menu = "1. Create an account\n2. Log into account\n0. Exit\n"
         self.second_level_menu = "1. Balance\n2. Log out\n0. Exit\n"
         self.credentials = dict()
+        self.card_db = CardDataBase()
         self.choice()
+
 
     @staticmethod
     def user_choice(action):
@@ -38,17 +69,19 @@ class Account:
     def account_creation(self):
         card_number = self.card_number_generation()
         pin = self.pin_generation()
-        self.add_credentials(pin, card_number)
+        self.add_credentials(card_number, pin)
+        self.card_db.cursor_creation(card_number, pin)
         print("Your card has been created\nYour card number:\n{}\nYour card PIN:\n{}" \
               .format(card_number, pin))
 
-    def add_credentials(self, pin, card_number):
+    def add_credentials(self, card_number, pin):
         self.credentials[card_number] = pin
 
     def log_in(self):
         input_card_number = self.user_choice('Enter your card number:\n')
         input_pin = self.user_choice("Enter your PIN:\n")
         self.verification(input_card_number, input_pin)
+
 
     @staticmethod
     def balance(balance):

@@ -14,6 +14,8 @@ stages:
   step: 9830
 topics:
   0:
+  - title: Boolean logic
+    theory_id: 6025
   - title: Introduction to OOP
     theory_id: 3614
   - title: Introduction to Python
@@ -34,12 +36,18 @@ topics:
     theory_id: 5859
   - title: Integer arithmetic
     theory_id: 5865
-  - title: Boolean logic
-    theory_id: 6025
   - title: Type casting
     theory_id: 6224
   - title: Naming variables
     theory_id: 5885
+  - title: Taking input
+    theory_id: 5913
+  - title: String formatting
+    theory_id: 6037
+  - title: Program with numbers
+    theory_id: 5872
+  - title: Comparisons
+    theory_id: 5920
   - title: List
     theory_id: 5979
   - title: Dictionary
@@ -50,14 +58,6 @@ topics:
     theory_id: 5900
   - title: Scopes
     theory_id: 6322
-  - title: Taking input
-    theory_id: 5913
-  - title: Program with numbers
-    theory_id: 5872
-  - title: Comparisons
-    theory_id: 5920
-  - title: String formatting
-    theory_id: 6037
   - title: If statement
     theory_id: 5953
   - title: Else statement
@@ -97,16 +97,18 @@ topics:
     theory_id: 7409
   - title: Basic SELECT statement
     theory_id: 7392
-  - title: The NULL value
-    theory_id: 7907
   - title: SELECT FROM statement
     theory_id: 8611
   - title: SELECT FROM WHERE statement
     theory_id: 8619
-  - title: Basic INSERT statement
-    theory_id: 9059
   - title: Basic CREATE statement
     theory_id: 9084
+  - title: Alter table
+    theory_id: 9579
+  - title: Consistency constraints
+    theory_id: 9587
+  - title: Basic INSERT statement
+    theory_id: 9059
   3:
   - title: Basic DELETE statement
     theory_id: 9075
