@@ -20,28 +20,40 @@ class CardDataBase:
         self.data_insertion(self.cursor, card_number, pin)
 
         self.connection.commit()
+
 # connection.close()
 
     @staticmethod
     def data_insertion(cursor, card_number, pin):
         cursor.execute("""INSERT INTO card ( number, pin, balance)  VALUES (?,?,?);""", (str(card_number), str(pin), 0))
 
-    @staticmethod
-    def select_data(cursor, input_card_number, input_pin):
-        cursor.execute("SELECT number, pin FROM card WHERE number = '{}' AND pin = '{}'".format(input_card_number,
+    def select_data(self, input_card_number, input_pin):
+        self.cursor.execute("SELECT number, pin FROM card WHERE number = '{}' AND pin = '{}'".format(input_card_number,
                                                                                                 input_pin))
-        if cursor.fetchone() is None:
+        if self.cursor.fetchone() is None:
             return False
         else:
             return True
+
+    def add_income(self, input_card_number, input_money):
+        query = f"UPDATE card " \
+                f"SET balance = balance + {input_money} " \
+                f"WHERE number = {input_card_number}"
+        self.cursor.execute(query)
+
+
+    def balance(self, input_card_number, input_pin):
+        query = f"SELECT balance FROM card WHERE number = {input_card_number} AND pin = {input_pin}"
+        self.cursor.execute(query)
+        balance = self.cursor.fetchone()[0]
+        return balance
 
 
 class Account:
 
     def __init__(self):
         self.first_level_menu = "1. Create an account\n2. Log into account\n0. Exit\n"
-        self.second_level_menu = "1. Balance\n2. Log out\n0. Exit\n"
-        #self.credentials = dict()
+        self.second_level_menu = "1. Balance\n2. Add income\n3. Do transfer\n4. Close account\n5. Log out\n0. Exit\n"
         self.card_db = CardDataBase()
         self.choice()
 
@@ -75,21 +87,49 @@ class Account:
     def account_creation(self):
         card_number = self.card_number_generation()
         pin = self.pin_generation()
-        #self.add_credentials(card_number, pin)
         self.card_db.cursor_creation(card_number, pin)
         print("Your card has been created\nYour card number:\n{}\nYour card PIN:\n{}".format(card_number, pin))
-
-    #def add_credentials(self, card_number, pin):
-    #    self.credentials[card_number] = pin
 
     def log_in(self):
         input_card_number = self.user_choice('Enter your card number:\n')
         input_pin = self.user_choice("Enter your PIN:\n")
         self.verification(input_card_number, input_pin)
 
-    @staticmethod
-    def balance(balance):
-        print(f"Balance: {balance}\n")
+
+    def substract_income(self, input_card_number, money_to_transfer):
+        query = f"UPDATE card " \
+                f"SET balance = balance - {money_to_transfer} " \
+                f"WHERE number = {input_card_number}"
+        self.card_db.cursor.execute(query)
+
+    def close_account(self, input_card_number, input_pin):
+        query = f"DELETE FROM card WHERE number = {input_card_number} AND pin = {input_pin}"
+        self.card_db.cursor.execute(query)
+        print("The account has been closed!")
+
+    def do_transfer(self, input_card_number):
+        card_to_transfer = int(input("Transfer.\nEnter card number:\n"))
+        query = f"SELECT number FROM card WHERE number = {card_to_transfer}"
+        self.card_db.cursor.execute(query)
+        if self.card_db.cursor.fetchone() is None:
+            print("Such a card does not exist.\n")
+        elif card_to_transfer == input_card_number:
+            print("You can't transfer money to the same account!\n")
+        elif card_to_transfer != self.luhn_algorithm(str(card_to_transfer)):
+            print("Probably you made mistake in the card number. Please try again!\n")
+        else:
+            money_to_transfer = int(input("Enter how much money you want to transfer:\n"))
+            if self.check_balance(input_card_number, money_to_transfer):
+                print("Not enough money!\n")
+            else:
+                self.card_db.add_income(card_to_transfer, money_to_transfer)
+                self.substract_income(input_card_number, money_to_transfer)
+
+    def check_balance(self, input_card_number, money_to_transfer):
+        query = "SELECT balance FROM card WHERE number = '{}'".format(input_card_number)
+        self.card_db.cursor.execute(query)
+        balance = self.card_db.cursor.fetchone()[0]
+        return money_to_transfer > balance
 
     @staticmethod
     def exit():
@@ -97,15 +137,25 @@ class Account:
         quit()
 
     def verification(self, input_card_number, input_pin):
-        if self.card_db.select_data(self.card_db.cursor, input_card_number, input_pin):
-        #if input_card_number in self.credentials and self.credentials[input_card_number] == input_pin:
+        if self.card_db.select_data(input_card_number, input_pin):
             print("You have successfully logged in!\n")
             while True:
                 action = self.user_choice(self.second_level_menu)
                 if action == 1:
-                    self.balance(0)
+                    balance = self.card_db.balance(input_card_number, input_pin)
+                    print(f"Balance: {balance}\n")
                     continue
                 elif action == 2:
+                    input_money = int(input("Enter income:\n"))
+                    self.card_db.add_income(input_card_number, input_money)
+                    print ("Income was added!\n")
+
+                elif action == 3:
+                    self.do_transfer(input_card_number)
+                    print("Success!\n")
+                elif action == 4:
+                    self.close_account(input_card_number, input_pin)
+                elif action == 5:
                     print("You have successfully logged out!\n")
                     break
                 elif action == 0:
