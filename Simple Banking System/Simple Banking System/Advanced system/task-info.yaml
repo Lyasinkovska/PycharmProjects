@@ -417,6 +417,36 @@ files:
     if __name__ == '__main__':
         BankingSystem('banking.banking').run_tests()
   learner_created: false
+- name: banking/database_draft.py
+  visible: true
+  text: "import sqlite3\n\nconnection = sqlite3.connect(\"draft.db\")\n\ncursor =\
+    \ connection.cursor()\n\n'''cursor.execute(\"\"\"CREATE TABLE family(\n\t\t\t\t\
+    name VARCHAR(20),\n\t\t\t\tsurname VARCHAR(20),\n\t\t\t\tage INTEGER,\n\t\t\t\t\
+    sex TEXT\n\t\t\t\t)\n\t\t\t\t\"\"\"\n)'''\ncursor.execute(\"\"\"INSERT INTO family\
+    \ VALUES ('Liudmyla', 'Yasinkovska', 29, 'female')\"\"\")\ncursor.execute(\"\"\
+    \"INSERT INTO family VALUES (\"Yura\", \"Mamonov\", 37, \"male\")\"\"\")\ncursor.execute(\"\
+    \"\"SELECT * FROM family\"\"\")\nprint(cursor.fetchall())\n\nconnection.commit()\n\
+    #connection.close()\n"
+  learner_created: true
+- name: banking/banking_draft.py
+  visible: true
+  text: "import random\n\n\ndef card_number_generation():\n\n\trandom.seed(random.random())\n\
+    \tiin = \"400000\"\n\tinit_card_number = iin + str(random.sample(range(100000000,\
+    \ 999999999), 1)[0])\n\t#print(init_card_number)\n\n\todd_digits = [int(digit)\
+    \ * 2 for digit in init_card_number[::2]]\n\teven_digits = [int(digit) for digit\
+    \ in init_card_number[1::2]]\n\tluhn_card_1 = odd_digits + even_digits\n\n\tluhn_card_2\
+    \ = [(digit - 9) if digit >= 9 else digit for digit in luhn_card_1]\n\t#print(sum(luhn_card_2),\
+    \ (sum(luhn_card_2)//10+1)*10)\n\tif sum(luhn_card_2)%10 == 0:\n\t\tlast_digit\
+    \ = 0\n\telse:\n\t\tlast_digit = (sum(luhn_card_2)//10+1)*10 - sum(luhn_card_2)\n\
+    \treturn int(init_card_number + str(last_digit))\n\n\n\n\nprint(card_number_generation())\n\
+    \n"
+  learner_created: true
+- name: banking/card.db
+  visible: true
+  learner_created: true
+- name: banking/draft.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/109/stages/594/implement
 status: Unchecked
-record: -1
+record: 5
