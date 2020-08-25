@@ -5,7 +5,7 @@ def card_number_generation():
 
 	random.seed(random.random())
 	iin = "400000"
-	init_card_number = iin + str(random.sample(range(100000000, 999999999), 1)[0])
+	init_card_number = str(400000397219650) #iin + str(random.sample(range(100000000, 999999999), 1)[0])
 	#print(init_card_number)
 
 	odd_digits = [int(digit) * 2 for digit in init_card_number[::2]]
@@ -24,4 +24,6 @@ def card_number_generation():
 
 
 print(card_number_generation())
+x = str(4000003972196502)
+print(x[:-1])
 

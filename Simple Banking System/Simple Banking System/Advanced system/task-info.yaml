@@ -444,9 +444,16 @@ files:
 - name: banking/card.db
   visible: true
   learner_created: true
-- name: banking/draft.db
+- name: card.db
+  visible: true
+  learner_created: true
+- name: card.s3db
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/109/stages/594/implement
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/109/stages/594/implement">JetBrains
+    Academy</a>
+  time: Tue, 25 Aug 2020 08:09:37 UTC
 record: 5
