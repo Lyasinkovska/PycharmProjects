@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import sessionmaker
 
 
+
 engine = create_engine('sqlite:///todo.db?check_same_thread=False')
 Base = declarative_base()
 
@@ -25,7 +26,7 @@ session = Session()
 
 def add_new_task():
     new_task = input("Enter task\n")
-    deadline = input ("Enter deadline\n")
+    deadline = input("Enter deadline\n")
     new_row = Table(task=f'{new_task}', deadline=datetime.strptime(deadline,'%Y-%m-%d'))
     session.add(new_row)
     session.commit()
@@ -40,20 +41,25 @@ def print_todays_tasks():
     else:
         print("Nothing to do!\n")
 
+
 def print_week_tasks():
     for day in range(7):
         next_day = (datetime.today() + timedelta(days=day)).date()
-        print(f"{next_day.strftime ('%A')} {next_day.day} {next_day.strftime ('%b')}:")
+        print(f"\n{next_day.strftime ('%A')} {next_day.day} {next_day.strftime ('%b')}:")
         records = session.query(Table).filter(Table.deadline == next_day).all()
         if records:
-            for i in range (len (records)):
-                print (f'{i + 1}. {records[i]}')
+            for i in range(len(records)):
+                print(f'{i + 1}. {records[i]}')
         else:
-            print ("Nothing to do!\n")
+            print("Nothing to do!")
 
 
 def print_all_tasks():
-    pass
+    all_tasks = session.query(Table).order_by(Table.deadline).all()
+    all_deadlines = session.query(Table.deadline).order_by(Table.deadline).all()
+    for i in range(len(all_tasks)):
+        print(f'{i+1}. {all_tasks[i]}. {all_deadlines[i].deadline.day} {all_deadlines[i].deadline.strftime("%b")}')
+
 
 while True:
     action = input("1) Today's tasks\n2) Week's tasks\n3) All tasks\n4) Add task\n0) Exit\n")
