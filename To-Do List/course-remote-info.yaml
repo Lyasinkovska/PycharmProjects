@@ -6,16 +6,16 @@ hyperskill_project:
 stages:
 - id: 570
   step: 9619
-  is_completed: false
+  is_completed: true
 - id: 571
   step: 9620
-  is_completed: false
+  is_completed: true
 - id: 572
   step: 9621
-  is_completed: false
+  is_completed: true
 - id: 573
   step: 9622
-  is_completed: false
+  is_completed: true
 topics:
   0:
   - title: Computer programming
