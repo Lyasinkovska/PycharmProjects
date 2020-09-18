@@ -1,0 +1,3 @@
+n = int(input())
+
+my_stack = ...

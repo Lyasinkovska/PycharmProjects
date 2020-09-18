@@ -210,6 +210,49 @@ files:
     if __name__ == '__main__':
         CalcTest("calculator.calculator").run_tests()
   learner_created: false
+- name: calculator/dr.py
+  visible: true
+  text: "# write your code here\ndef replacement(element):\n\tif element == \"+++\"\
+    \ or element == len(element)*\"+\":\n\t\treturn \"+\"\n\telif element == len(element)*\"\
+    -\" and len(element) % 2 == 0:\n\t\treturn \"+\"\n\telif element == len(element)*\"\
+    -\" and len(element) % 2 != 0:\n\t\treturn \"-\"\n\telse:\n\t\treturn element\n\
+    \n\ndef sum_of_elements(list_of_elements):\n\tnew_numb = [list_of_elements[0]]\n\
+    \tfor i in range(1, len(list_of_elements), 2):\n\t\tnew_numb.append(list_of_elements[i]\
+    \ + list_of_elements[i + 1])\n\treturn sum([int(numb) for numb in new_numb])\n\
+    \n\ndef check_command(user_input):\n\tif user_input == \"/help\":\n\t\tprint('The\
+    \ program evaluates the sum of numbers.')\n\telif user_input == \"/exit\":\n\t\
+    \tprint(\"Bye!\")\n\t\texit()\n\telse:\n\t\tprint(\"Unknown command\")\n\n\ndef\
+    \ exceptions(user_input):\n\tif len (user_input) == 1:\n\t\tif user_input[0] ==\
+    \ \"-\":\n\t\t\tprint (user_input)\n\t\telif user_input[0] == \"+\":\n\t\t\tprint\
+    \ (user_input.lstrip (\"+\"))\n\t\telif user_input[-1] == \"+\" or user_input[-1]\
+    \ == \"-\" or user_input.isalpha():\n\t\t\tprint (\"Invalid expression\")\n\t\
+    elif \"+\" or \"-\" not in user_input.split ():\n\t\tprint (\"Invalid expression\"\
+    )\n\telif any (user_input.split().isalpha()):\n\t\tprint (\"Invalid expression\"\
+    )\n\n\ndef data_dictionary(user_input, input_data):\n\tif check_variable(user_input):\n\
+    \t\tif check_value(user_input, input_data):\n\t\t\tinput_data[user_input.split(\"\
+    =\", 1)[0].strip()] = int(check_value(user_input, input_data))\n\t\telse:\n\t\t\
+    \tprint(\"Invalid assignment\")\n\n\ndef data_return(user_input, input_data):\n\
+    \tif user_input.strip() in input_data.keys():\n\t\tprint(input_data[user_input.strip()])\n\
+    \telse:\n\t\tprint(\"Unknown variable\")\n\n\ndef check_variable(user_input):\n\
+    \tif user_input.split(\"=\", 1)[0].strip().isalpha():\n\t\treturn True\n\telse:\n\
+    \t\tprint(\"Invalid identifier\")\n\n\ndef check_value(user_input, input_data):\n\
+    \tif user_input.split(\"=\", 1)[1].strip().isnumeric():\n\t\treturn user_input.split(\"\
+    =\", 1)[1].strip()\n\telif user_input.split(\"=\")[1].strip() in input_data.keys():\n\
+    \t\treturn input_data.get(user_input.split(\"=\", 1)[1].strip())\n\n\ndef check_expression(user_input,\
+    \ input_data):\n\ttry:\n\t\t# print(sum_of_elements([replacement(number) for number\
+    \ in user_input.split()]))\n\t\tif \"=\" in user_input:\n\t\t\tdata_dictionary(user_input,\
+    \ input_data)\n\n\t\telse:\n\t\t\tdata_return(user_input, input_data)\n\texcept:\n\
+    \t\texceptions(user_input)\n\n\ndef calculator():\n\tinput_data = dict()\n\twhile\
+    \ True:\n\t\tuser_input = input()\n\t\tif user_input.startswith(\"/\"):\n\t\t\t\
+    check_command(user_input)\n\t\telif user_input == \"\":\n\t\t\tcontinue\n\t\t\
+    else:\n\t\t\tcheck_expression(user_input, input_data)\n\n\ncalculator()\n"
+  learner_created: true
+- name: calculator/gg.py
+  visible: true
+  text: |2-
+
+    print(0xA+0xa)
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/74/stages/415/implement
 status: Unchecked
 record: -1
