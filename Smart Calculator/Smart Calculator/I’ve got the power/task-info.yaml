@@ -254,17 +254,9 @@ files:
     print(0xA+0xa)
   learner_created: true
 feedback_link: https://hyperskill.org/projects/74/stages/415/implement
-status: Failed
+status: Solved
 feedback:
-  message: "Exception in test #2\n\nTraceback (most recent call last):\n  File \"\
-    calculator.py\", line 67, in <module>\n    calculator()\n  File \"calculator.py\"\
-    , line 14, in calculator\n    print(sum_of_elements([replacement(number.strip(),\
-    \ data) for number in user_input.split()]))\n  File \"calculator.py\", line 64,\
-    \ in sum_of_elements\n    return sum([int(numb) for numb in new_numb])\n  File\
-    \ \"calculator.py\", line 64, in <listcomp>\n    return sum([int(numb) for numb\
-    \ in new_numb])\nValueError: invalid literal for int() with base 10: '*3'\n\n\
-    Please find below the output of your program during this failed test.\nNote that\
-    \ the '>' character indicates the beginning of the input line.\n\n---\n\n> variable\
-    \ = 777 \n>  Variable\nUnknown variable\n> 4 * 3"
-  time: Fri, 18 Sep 2020 10:18:33 UTC
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/74/stages/415/implement">JetBrains
+    Academy</a>
+  time: Tue, 22 Sep 2020 15:04:02 UTC
 record: -1

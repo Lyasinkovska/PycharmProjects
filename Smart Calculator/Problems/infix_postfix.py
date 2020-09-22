@@ -1,8 +1,9 @@
 from collections import deque
 
 
-var = "10 + 2 * 8 - 3 * ( 4 - 4 )" # 10 2 8 * + 3 -
+var = "8 * 3 + 12 * ( 4 - 2 )".split() # 23
 #var = "10 + 2 - 8 + 3"  # 10 2 + 8 – 3 +
+
 
 def operations(operator, number2, number1):
 	if operator == "+":
@@ -17,19 +18,28 @@ def operations(operator, number2, number1):
 
 def infix_postfix(stack, operators):
 	result = list()
-	for elem in var.split():
+	for elem in var:
 		if elem.isnumeric():
 			result.append(elem)
+		elif elem == "(":
+			operators["+"] = True
+			operators["-"] = True
+		elif elem == ")":
+			operators["+"] = False
+			operators["-"] = False
 		elif elem in operators.keys():
 			if stack == deque():
 				stack.append(elem)
 			elif operators[stack[-1]] < operators[elem]:
 				stack.append(elem)
-			else:
-				while len(stack) > 0 and operators[stack[-1]] >= operators[elem]:
+			elif operators[stack[-1]] == operators[elem]:
+				stack.append(elem)
+			elif operators[stack[-1]] > operators[elem]:
+				while len(stack) > 0:
 					result.append(stack.pop())
 				stack.append(elem)
-	result.append(stack.pop())
+	while len(stack) > 0:
+		result.append(stack.pop())
 	print(result)
 	return result
 
@@ -42,6 +52,23 @@ def postfix_result(stack, postfix_list, operators):
 			new_elem = operations(elem, stack.pop(), stack.pop())
 			stack.append(new_elem)
 	print(stack[0])
+
+
+def brackets_check(string):
+	brackets = deque()
+	for element in string:
+		if element == "(":
+			brackets.appendleft(element)
+		elif element == ")":
+			if len(brackets) > 0:
+				brackets.pop()
+			else:
+				return False
+
+	if len(brackets) == 0:
+		return True
+	else:
+		return False
 
 
 def calculations():
