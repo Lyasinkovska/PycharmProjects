@@ -247,12 +247,6 @@ files:
     check_command(user_input)\n\t\telif user_input == \"\":\n\t\t\tcontinue\n\t\t\
     else:\n\t\t\tcheck_expression(user_input, input_data)\n\n\ncalculator()\n"
   learner_created: true
-- name: calculator/gg.py
-  visible: true
-  text: |2-
-
-    print(0xA+0xa)
-  learner_created: true
 feedback_link: https://hyperskill.org/projects/74/stages/415/implement
 status: Solved
 feedback:
