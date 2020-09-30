@@ -1,2 +1,6 @@
 content:
 - Caesar cipher
+- To_bytes()
+- Bytes slices
+- Decypher a message
+- Error

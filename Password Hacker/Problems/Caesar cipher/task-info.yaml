@@ -4,5 +4,9 @@ files:
   visible: true
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/8068
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution<br/><br/>Continue on <a href="https://hyperskill.org/learn/step/8068">JetBrains
+    Academy</a></html>
+  time: Sun, 27 Sep 2020 16:56:39 UTC
 record: -1
