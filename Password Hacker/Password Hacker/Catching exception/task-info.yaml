@@ -1244,6 +1244,13 @@ files:
     biao
     xuan
   learner_created: true
+- name: hacking/draft.py
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/80/stages/445/implement
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations! Continue on <a href="https://hyperskill.org/projects/80/stages/445/implement">JetBrains
+    Academy</a>
+  time: Thu, 15 Oct 2020 12:42:33 UTC
+record: 4
