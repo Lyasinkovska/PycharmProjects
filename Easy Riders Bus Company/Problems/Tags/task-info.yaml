@@ -1,0 +1,17 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    import re
+
+
+    template = ''
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/10362#comment
+status: Failed
+feedback:
+  message: |
+    Failed test #1 of 7. incorrect result for <start></start><start></start>, should be <start></start>
+  time: Wed, 25 Nov 2020 14:54:47 UTC
+record: -1

