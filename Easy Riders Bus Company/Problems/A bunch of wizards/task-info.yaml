@@ -1,0 +1,17 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    gryffindor = set(input().split())
+    ravenclaw = set(input().split())
+    slytherin = set(input().split())
+    hufflepuff = set(input().split())
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/8997#comment
+status: Solved
+feedback:
+  message: <html>Correct solution<br/><br/>Continue on <a href="https://hyperskill.org/learn/step/8997#comment">JetBrains
+    Academy</a></html>
+  time: Fri, 27 Nov 2020 09:59:47 UTC
+record: -1

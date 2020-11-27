@@ -68,9 +68,20 @@ def validation_calculation():
 			validation['a_time'] += 1
 		if stop_name_validation(el) == False:
 			validation['stop_name'] += 1
+
 	print(f"Format validation: {sum(validation.values())} errors")
 	print(f"stop_name: {validation['stop_name']}\nstop_type: {validation['stop_type']}\na_time: {validation['a_time']}")
 
 
+def stops_number():
+	bus_stops = {}
+	for data in input_data:
+		if data['bus_id'] not in bus_stops:
+			bus_stops[data["bus_id"]] = 1
+		else:
+			bus_stops[data["bus_id"]] += 1
+	print("Line names and number of stops:")
+	for bus_id in bus_stops:
+		print(f'bus_id: {bus_id}, stops: {bus_stops[bus_id]}')
 
-validation_calculation()
+stops_number()
