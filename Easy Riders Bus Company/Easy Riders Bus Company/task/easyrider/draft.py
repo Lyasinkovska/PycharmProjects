@@ -1,13 +1,15 @@
-import re
+import itertools
+a = [1, 2, 3]
+b = [2, 3, 4]
+c = [4, 5, 6]
+abc = [a, b, c]
 
-template = r"[A-Z][a-zA-Z]+\s?\w+?\s(Avenue|Street|Road|Boulevard)$"
-
-"[A-Z]\w+\s?\w+?\s[AvenueStreetRoadBoulevard]\w+$"
 
 
-streets = ["bourbon street", "Sesame Street", "Elm", "Prospekt Av.", "Santa Monica Boulevard"]
-for street in streets:
-	if re.match(template, street) == None:
-		print(False)
-	else:
-		print(True)
+def rSubset(arr, r):
+	return list(itertools.combinations(arr, r))
+
+z = set()
+for el in rSubset(abc, 2):
+	z.update(set(el[0]) & set(el[1]))
+print(z)

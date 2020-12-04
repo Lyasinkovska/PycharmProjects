@@ -100,6 +100,18 @@ files:
     \ Boulevard\"]\nfor street in streets:\n\tif re.match(template, street) == None:\n\
     \t\tprint(False)\n\telse:\n\t\tprint(True)\n"
   learner_created: true
+- name: easyrider/Documentation.jpg
+  visible: true
+  learner_created: true
+- name: easyrider/Diagram_of_the_bus_line.jpg
+  visible: true
+  learner_created: true
+- name: easyrider/Diagram_of_the_bus_line (1).jpg
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/128/stages/683/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Mon, 30 Nov 2020 14:28:07 UTC
+record: 4

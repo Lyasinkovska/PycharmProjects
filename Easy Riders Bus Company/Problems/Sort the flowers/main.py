@@ -2,3 +2,4 @@
 prices = [float(price) for price in input().split()]
 
 # your code below
+print(sorted(prices, reverse=True))
