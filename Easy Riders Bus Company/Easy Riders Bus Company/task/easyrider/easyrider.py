@@ -3,7 +3,7 @@ import re
 from itertools import combinations
 from datetime import datetime as dt
 
-#input_data = json.loads(input())
+input_data = json.loads(input())
 input_data_1 = [
     {
         "bus_id": 128,
@@ -195,31 +195,40 @@ def start_stop():
 		  f'Finish stops: {len(finish_stops)} {sorted(finish_stops)}\n')
 
 
-def bus_information():
+def bus_ids():
 	buses = {}
-
+	for bus in input_data:
+		if bus['bus_id'] not in buses:
+			buses[bus['bus_id']] = [(bus['stop_name'], bus['a_time'])]
+		else:
+			buses[bus['bus_id']].append((bus['stop_name'], bus['a_time']))
+	return buses
 
 
 def check_time():
-	new_time = None
-	new_bus_id = None
-	for line in input_data_1:
-		bus_id = line['bus_id']
-		time = line['a_time']
-		print(time, bus_id)
-		if new_bus_id is None:
-			new_bus_id = bus_id
-		elif new_bus_id == bus_id:
+	buses = bus_ids()
+	print(f"Arrival time test:")
+	for bus in buses:
+		new_time = None
+		for bus_time in buses.get(bus):
+			station, time = bus_time[0], bus_time[1]
 			if new_time is None or new_time < time:
 				new_time = time
-				continue
+				if new_time == buses.get(bus)[-1][1]:
+					print("OK")
 			elif new_time > time:
-				print(line['stop_name'], time)
+				print(f"bus_id line {bus}: wrong time on station {station}")
 				break
-		else:
-			bus_id = line['bus_id']
-			continueK
 
 
-print(bus_information())
+
+
+
+
+
+
+
+
+
+bus_ids()
 check_time()
