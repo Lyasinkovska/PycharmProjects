@@ -4,7 +4,7 @@ from itertools import combinations
 from datetime import datetime as dt
 
 input_data = json.loads(input())
-input_data_1 = [
+'''input_data_1 = [
     {
         "bus_id": 128,
         "stop_id": 1,
@@ -18,7 +18,7 @@ input_data_1 = [
         "stop_id": 3,
         "stop_name": "Elm Street",
         "next_stop": 5,
-        "stop_type": "",
+        "stop_type": "O",
         "a_time": "08:19"
     },
     {
@@ -27,7 +27,7 @@ input_data_1 = [
         "stop_name": "Fifth Avenue",
         "next_stop": 7,
         "stop_type": "O",
-        "a_time": "08:17"
+        "a_time": "08:25"
     },
     {
         "bus_id": 128,
@@ -35,7 +35,7 @@ input_data_1 = [
         "stop_name": "Sesame Street",
         "next_stop": 0,
         "stop_type": "F",
-        "a_time": "08:07"
+        "a_time": "08:37"
     },
     {
         "bus_id": 256,
@@ -58,8 +58,8 @@ input_data_1 = [
         "stop_id": 6,
         "stop_name": "Sunset Boulevard",
         "next_stop": 7,
-        "stop_type": "",
-        "a_time": "09:44"
+        "stop_type": "O",
+        "a_time": "09:59"
     },
     {
         "bus_id": 256,
@@ -87,12 +87,7 @@ input_data_1 = [
     }
 ]
 
-validation = {"bus_id": 0,
-        "stop_id": 0,
-        "stop_name": 0,
-        "next_stop": 0,
-        "stop_type": 0,
-        "a_time": 0}
+
 
 input_data2 = [
     {
@@ -111,7 +106,13 @@ input_data2 = [
         "stop_type": "F",
         "a_time": "08:16"
     }
-]
+]'''
+validation = {"bus_id": 0,
+        "stop_id": 0,
+        "stop_name": 0,
+        "next_stop": 0,
+        "stop_type": 0,
+        "a_time": 0}
 
 def validation_calculation():
 	for _ in input_data:
@@ -155,7 +156,7 @@ def transfer_stops(all_stops):
 	return transfer_stops
 
 
-def start_stop():
+def start_stop(input_data):
 	bus_lines = {}
 
 	for data in input_data:
@@ -180,6 +181,7 @@ def start_stop():
 	start_stops = set()
 	finish_stops = set()
 	all_stops = []
+	opt_stops = []
 	for line in bus_lines:
 		if not bus_lines[line]['start_stops'] or not bus_lines[line]['finish_stops']:
 			print(f"There is no start or end stop for the line: {line}.")
@@ -187,12 +189,20 @@ def start_stop():
 			start_stops.update(bus_lines[line]['start_stops'])
 			finish_stops.update(bus_lines[line]['finish_stops'])
 			all_stops.append(bus_lines[line]['all_stops'])
+			opt_stops.extend(bus_lines[line]['opt_stops'])
 
 	transfer_stop = transfer_stops(all_stops)
+	on_demand_stops = sorted(set(opt_stops)&transfer_stop)
+	print("On demand stops test:")
+	if on_demand_stops:
+		print(f"Wrong stop type: {on_demand_stops}")
+	else:
+		print("OK")
 
-	print(f'Start stops: {len(start_stops)} {sorted(start_stops)}\n'
+
+	'''print(f'Start stops: {len(start_stops)} {sorted(start_stops)}\n'
 		  f'Transfer stops: {len(transfer_stop)} {sorted(transfer_stop)}\n'
-		  f'Finish stops: {len(finish_stops)} {sorted(finish_stops)}\n')
+		  f'Finish stops: {len(finish_stops)} {sorted(finish_stops)}\n')'''
 
 
 def bus_ids():
@@ -221,14 +231,5 @@ def check_time():
 				break
 
 
+start_stop(input_data)
 
-
-
-
-
-
-
-
-
-bus_ids()
-check_time()
