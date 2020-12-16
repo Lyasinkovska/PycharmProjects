@@ -10,6 +10,9 @@ class Team(models.Model):
 
 
 class League(models.Model):
+    name = models.CharField(max_length=32)
+    champion = models.ForeignKey(Team, related_name='champion_of', on_delete=models.CASCADE)
+    number_of_teams = models.IntegerField()
 
     class Meta:
         app_label = 'tournament'

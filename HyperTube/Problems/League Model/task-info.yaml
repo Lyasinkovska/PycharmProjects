@@ -20,5 +20,8 @@ files:
             app_label = 'tournament'
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/6840#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: Fri, 11 Dec 2020 10:48:58 UTC
 record: -1
