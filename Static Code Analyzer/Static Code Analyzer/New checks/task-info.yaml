@@ -311,15 +311,12 @@ feedback_link: https://hyperskill.org/projects/112/stages/610/implement#comment
 status: Failed
 feedback:
   message: |-
-    Wrong answer in test #2
+    Exception in test #1
 
-    Incorrect number of warning messages.
-
-    Please find below the output of your program during this failed test.
-    Note that the '>' character indicates the beginning of the input line.
-
-    ---
-
-    > test/test_1.py
-  time: Wed, 16 Dec 2020 13:31:29 UTC
+    Traceback (most recent call last):
+      File "code_analyzer.py", line 49
+        break
+        ^
+    SyntaxError: 'break' outside loop
+  time: Wed, 16 Dec 2020 18:43:14 UTC
 record: -1

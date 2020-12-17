@@ -11,10 +11,11 @@ errors = {'S001': 'Too long',
 
 
 def main():
-	with open(input(), 'r') as file:
+	with open('file.txt', 'r') as file: # 'file.txt'
 		counter = 0
 		for n, line in enumerate(file, start=1):
 			long(line, n)
+			indentation(line, n)
 			semicolon(line, n)
 			two_spaces(line, n)
 			todo(line, n)
@@ -33,24 +34,21 @@ def long(line, n, error='S001'):
 
 
 def indentation(line, n, error='S002'):
-
-
+	if line.find(' ') == 0:
+		if (len(line) - len(line.lstrip())) % 4 != 0:
+			print(f'Line {n}: {error} {errors.get(error)}')
 
 
 def semicolon(line, n, error='S003'):
-	template = r'.*;'
+
 	if ';' in line:
+		if "'" in line:
+			line.split("'")
 		if '#' in line:
-			line, line2 = line.split('#')
-			if re.match(template, line):
+			line1, line2 = line.split('#')
+			if ';' in line1:
 				print(f'Line {n}: {error} {errors.get(error)}')
-		elif "'" in line:
-			lines = line.split("'")
-			if ";" in line[1]:
-				pass
-		else:
-			if re.match(template, line):
-				print(f'Line {n}: {error} {errors.get(error)}')
+
 
 
 def two_spaces(line, n, error='S004'):
