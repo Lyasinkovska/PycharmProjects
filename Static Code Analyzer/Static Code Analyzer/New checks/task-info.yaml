@@ -308,15 +308,8 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/112/stages/610/implement#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Exception in test #1
-
-    Traceback (most recent call last):
-      File "code_analyzer.py", line 49
-        break
-        ^
-    SyntaxError: 'break' outside loop
-  time: Wed, 16 Dec 2020 18:43:14 UTC
-record: -1
+  message: Congratulations!
+  time: Fri, 18 Dec 2020 11:35:49 UTC
+record: 3

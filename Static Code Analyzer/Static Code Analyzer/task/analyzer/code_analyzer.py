@@ -1,73 +1,26 @@
 import re
 
+file_path = input()
+with open(file_path) as file:
+    consecutive_empty_lines = 0
+    for i, line in enumerate(file, start=1):
+        line = line.rstrip()
+        if not line:
+            consecutive_empty_lines += 1
+            continue
 
-errors = {'S001': 'Too long',
-		  'S002': 'Indentation is not a multiple of four',
-		  'S003': 'Unnecessary semicolon',
-		  'S004': 'At least two spaces before inline comments required',
-		  'S005': 'TODO found',
-		  'S006': 'More than two blank lines used before this line'
-		  }
-
-
-def main():
-	with open('file.txt', 'r') as file: # 'file.txt'
-		counter = 0
-		for n, line in enumerate(file, start=1):
-			long(line, n)
-			indentation(line, n)
-			semicolon(line, n)
-			two_spaces(line, n)
-			todo(line, n)
-			if not line.strip():
-				counter += 1
-
-			else:
-				if counter > 2:
-					two_blank_lines(line, n)
-				counter = 0
-
-
-def long(line, n, error='S001'):
-	if len(line) > 79:
-		print(f'Line {n}: {error} {errors.get(error)}')
-
-
-def indentation(line, n, error='S002'):
-	if line.find(' ') == 0:
-		if (len(line) - len(line.lstrip())) % 4 != 0:
-			print(f'Line {n}: {error} {errors.get(error)}')
-
-
-def semicolon(line, n, error='S003'):
-
-	if ';' in line:
-		if "#" in line:
-			line1, line2 = line.split()
-			if ";" in line1:
-				print(f'Line {n}: {error} {errors.get(error)}')
-
-
-
-
-def two_spaces(line, n, error='S004'):
-	template = r'.*\s{2,}$'
-	if "#" in line:
-		line1, line2 = line.split('#')
-		if re.match(template, line1) is None:
-			print(f'Line {n}: {error} {errors.get(error)}')
-
-
-def todo(line, n, error="S005"):
-	if "#" in line:
-		line, line2 = line.split('#')
-		if "todo" in line2.lower():
-			print(f'Line {n}: {error} {errors.get(error)}')
-
-
-def two_blank_lines(line, n, error='S006'):
-	print(f'Line {n}: {error} {errors.get(error)}')
-
-
-main()
-
+        if len(line) > 79:
+            print(f'Line {i}: S001 Too long')
+        if line.startswith(' ') and re.search(r'^ +', line).span()[1] % 4 != 0:
+            print(f'Line {i}: S002 Indentation is not a multiple of four')
+        if re.search(r'^[^#]*;\s*(#.*)?$', line):
+            print(f'Line {i}: S003 Unnecessary semicolon')
+        if re.search(r'^[^#]*\S ?#.*$', line):
+            print(f'Line {i}: S004 At least two spaces'
+                  'before inline comment required')
+        if re.search(r'^[^#]*#.*[Tt][Oo][Dd][Oo].*$', line):
+            print(f'Line {i}: S005 TODO found')
+        if consecutive_empty_lines > 2:
+            print(f'Line {i}: S006 More than two blank lines'
+                  'used before this line')
+            consecutive_empty_lines = 0

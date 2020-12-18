@@ -326,6 +326,17 @@ files:
         print('NO TODO HERE;;')
         pass; # Todo something
   learner_created: false
+- name: analyzer/file.txt
+  visible: true
+  text: |-
+    print('hello')
+    print('hello');
+    print('hello');;;
+    print('hello');  # hello
+    # hello hello hello;
+    greeting = 'hello;'
+    print('hello')  # ;
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/112/stages/611/implement#comment
 status: Unchecked
 record: -1
