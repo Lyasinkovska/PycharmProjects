@@ -42,12 +42,11 @@ def indentation(line, n, error='S002'):
 def semicolon(line, n, error='S003'):
 
 	if ';' in line:
-		if "'" in line:
-			line.split("'")
-		if '#' in line:
-			line1, line2 = line.split('#')
-			if ';' in line1:
+		if "#" in line:
+			line1, line2 = line.split()
+			if ";" in line1:
 				print(f'Line {n}: {error} {errors.get(error)}')
+
 
 
 
