@@ -20,6 +20,8 @@ word = "any word"
 print(word.upper(), word.title(), word.casefold(), word.find("wo"), word.replace("any", "every"), word.capitalize(),
 	  word.count("a"), word.endswith("rd"), word.endswith("o"), word.split(), sep='\n')
 
+
 s1 = "Корован"
-print(s1[-3:-7:-1]+s1[-1:-3:-1])
-print(s1[::-1][2:6]+s1[::-1][0:2])
+print(s1[-3:-7:-1] + s1[-1:-3:-1])
+print(s1[::-1][2:6] + s1[::-1][0:2])
+print(s1[4:0:-1])
