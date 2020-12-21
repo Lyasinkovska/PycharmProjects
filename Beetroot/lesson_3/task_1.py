@@ -25,4 +25,4 @@ given_string = input()
 if len(given_string) < 2:
 	print("")
 else:
-	print(given_string[0:2]+given_string[-2:])
+	print(given_string[:2]+given_string[-2:])
