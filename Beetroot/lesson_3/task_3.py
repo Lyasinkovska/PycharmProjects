@@ -6,5 +6,4 @@ The program should check if your input is equal to the stored name even if the g
 if your input is “Anton” and the stored name is “anton”, it should return True.
 """
 
-my_name = "Liudmyla"
-print(input().lower() == my_name.lower())
+print(input().lower() == "Liudmyla".lower())

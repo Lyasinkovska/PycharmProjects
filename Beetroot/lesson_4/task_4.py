@@ -4,7 +4,7 @@ The math quiz program
 Write a program that asks the answer for a mathematical expression, checks whether the user is right or wrong,
 and then responds with a message accordingly.
 """
-
+'''
 import random
 
 start = 0
@@ -29,3 +29,8 @@ while True:
 				break
 			else:
 				print("Error")
+'''
+x = input()
+print(x, type(x))
+print(x.join(['1',' 2']))
+print(x is False)

@@ -44,11 +44,21 @@ var1 = random.randint(1,20)
 Теперь сделайте задание 2 но уже со случайными значениями.
 """
 
+
+def evaluation(number1, number2, operator):
+	if operator == "+":
+		return number1 + number2
+	elif operator == "-":
+		return number1 - number2
+	elif operator == "*":
+		return number1 * number2
+
+
 number_1 = random.randint(1, 20)
 number_2 = random.randint(1, 20)
 operators = ["+", "-", "*"]
 operator = random.choice(operators)
-result = eval(str(number_1) + operator + str(number_2))
+result = evaluation(number_1, number_2, operator)
 check_result = int(input(f"Please evaluate the expression: {number_1}{operator}{number_2}=?\n"))
 if check_result == result:
 	print("Ok")
