@@ -1,9 +1,12 @@
+import random
+
 """task 1
 Получить от пользователя его номер телефона, проверить подходит ли номер под форматы
 +380_________ (прочерки - любая цифра)
 0_________ (например 0931233232)
 0__ ___ __ __ (пробелы именно пробелы и телефон например 095 321 12 21)
 Если номер введен верно - похвалите человека. Если нет - поругайте."""
+
 test_numbers = ["+380986455862", "0986455862", "098 645 5862", "098645 58_62",
 				"098 645  862", "098 645__662", "098 645 b862", "325 698 55 66"]
 
@@ -24,6 +27,7 @@ while True:
 
 """задание 3
 проверить что введенная строка является полиндромом."""
+
 word = input()
 if word == word[::-1]:
 	print("It is a palindrome.")
@@ -39,3 +43,34 @@ import random
 var1 = random.randint(1,20)
 Теперь сделайте задание 2 но уже со случайными значениями.
 """
+
+number_1 = random.randint(1, 20)
+number_2 = random.randint(1, 20)
+operators = ["+", "-", "*"]
+operator = random.choice(operators)
+result = eval(str(number_1) + operator + str(number_2))
+check_result = int(input(f"Please evaluate the expression: {number_1}{operator}{number_2}=?\n"))
+if check_result == result:
+	print("Ok")
+else:
+	print("Error")
+
+
+"""Завдання: програма загадує число у вказаному діапазоні, а юзер повинен його вгадати.
+"""
+
+start = int(input("Please, enter start number:\n"))
+stop = int(input("Please, enter stop number:\n"))
+number = random.randint(start, stop)
+while True:
+	user_number = int(input(f"Try to guess number in the range ({start}, {stop})\n"))
+	if user_number < start or user_number > stop:
+		print("You are out of range")
+		continue
+	elif user_number == number:
+		print("Excellent. You are the winner!")
+		break
+	elif number > user_number:
+		print(f"The number is greater than {user_number}")
+	elif number < user_number:
+		print(f"The number is less than {user_number}")
