@@ -28,7 +28,7 @@ while True:
 """задание 3
 проверить что введенная строка является полиндромом."""
 
-word = input()
+word = input("Enter a word: ")
 print("It is a palindrome." if word.lower() == word[::-1].lower() else "It is not a palindrome.")
 
 
