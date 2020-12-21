@@ -6,4 +6,4 @@ The program should check if your input is equal to the stored name even if the g
 if your input is “Anton” and the stored name is “anton”, it should return True.
 """
 
-print(input().lower() == "Liudmyla".lower())
+print("Valid" if input().lower() == "Liudmyla".lower() else "Invalid")
