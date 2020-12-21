@@ -16,5 +16,9 @@ print("Good day {}! {} is a perfect day to learn some python.".format(name, day)
 print("Good day {1}! {0} is a perfect day to learn some python.".format(day, name))
 print("Good day {name}! {day} is a perfect day to learn some python.".format(name = "Liuda", day = "Friday"))
 
+empty_l = []
+empty_l.append(empty_l)
 
+print(empty_l)
+print(empty_l.copy())
 

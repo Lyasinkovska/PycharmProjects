@@ -15,6 +15,7 @@ with open(file_path) as file:
             print(f'Line {i}: S002 Indentation is not a multiple of four')
         if re.search(r'^[^#]*;\s*(#.*)?$', line):
             print(f'Line {i}: S003 Unnecessary semicolon')
+
         if re.search(r'^[^#]*\S ?#.*$', line):
             print(f'Line {i}: S004 At least two spaces'
                   'before inline comment required')

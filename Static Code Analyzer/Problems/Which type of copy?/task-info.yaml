@@ -1,0 +1,14 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    import copy
+
+
+    def detect_copy():
+        pass
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/9277#comment
+status: Unchecked
+record: -1
