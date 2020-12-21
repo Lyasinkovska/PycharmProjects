@@ -29,10 +29,7 @@ while True:
 проверить что введенная строка является полиндромом."""
 
 word = input()
-if word == word[::-1]:
-	print("It is a palindrome.")
-else:
-	print("It is not a palindrome. ")
+print("It is a palindrome." if word.lower() == word[::-1].lower() else "It is not a palindrome.")
 
 
 """Задание (із зірочкой):
