@@ -1,9 +1,10 @@
 import random
+
 """task 1
 За 10 попыток получить максимальное рендомное число. 
 Количество попыток запрашивать у пользователя."""
 
-while True:
+'''while True:
 	try:
 		max_attempts = int(input("Enter quantity of attempts: "))
 		start = int(input("Enter min number: "))
@@ -17,17 +18,31 @@ while True:
 		print(result)
 		break
 	except ValueError:
-		print("You should enter a number!")
+		print("You should enter a number!")'''
 
 """task 2
 написать цикл получения строки по определенному формату (число) 
 пока не введет число и мучаем его"""
 
+attempts = 3
+while attempts > 0:
+	valid_number = input()  # "+38 (098) 614 45 86"
+	space_pos = [i for i, symbol in enumerate(valid_number) if symbol == " "]
+
+	if len(valid_number) == 19 and valid_number.startswith("+38") and valid_number.find("(") == 4 and \
+		valid_number.find(")") == 8 and valid_number[5] == "0" and space_pos == [3, 9, 13, 16]:
+		valid_number = valid_number.strip("+38").replace("(", "").replace(")", "").replace(" ", "")
+	if valid_number.isnumeric():
+		print("Valid number")
+		break
+	else:
+		attempts -= 1
+		print("Invalid number, try again" if attempts > 0 else "No more attempts")
 
 """task 3
 получить от пользователя 10 чисел и вывести максимальное
 """
-attempts = 10
+'''attempts = 10
 max_number = None
 while attempts > 0:
 	try:
@@ -37,7 +52,7 @@ while attempts > 0:
 		attempts -= 1
 	except ValueError:
 		print("You should enter a numerical value!")
-print(max_number)
+print(max_number)'''
 
 """ task 4
 получаем в цикле 
@@ -48,5 +63,4 @@ print(max_number)
 запрашиваем действие 
 и снова число
 действие...
-
 если вместо числа или действия введено Q выходим"""
