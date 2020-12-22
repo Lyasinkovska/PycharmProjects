@@ -4,7 +4,7 @@ import random
 За 10 попыток получить максимальное рендомное число. 
 Количество попыток запрашивать у пользователя."""
 
-'''while True:
+while True:
 	try:
 		max_attempts = int(input("Enter quantity of attempts: "))
 		start = int(input("Enter min number: "))
@@ -18,13 +18,13 @@ import random
 		print(result)
 		break
 	except ValueError:
-		print("You should enter a number!")'''
+		print("You should enter a number!")
 
 """task 2
 написать цикл получения строки по определенному формату (число) 
 пока не введет число и мучаем его"""
 
-'''attempts = 5
+attempts = 5
 while attempts > 0:
 	valid_number = input()  # "+38 (098) 614 45 86"
 	space_pos = [i for i, symbol in enumerate(valid_number) if symbol == " "]
@@ -38,12 +38,12 @@ while attempts > 0:
 		break
 	else:
 		attempts -= 1
-		print("Invalid number, try again" if attempts > 0 else "No more attempts")'''
+		print("Invalid number, try again" if attempts > 0 else "No more attempts")
 
 """task 3
 получить от пользователя 10 чисел и вывести максимальное
 """
-'''attempts = 10
+attempts = 10
 max_number = None
 while attempts > 0:
 	try:
@@ -53,7 +53,7 @@ while attempts > 0:
 		attempts -= 1
 	except ValueError:
 		print("You should enter a numerical value!")
-print(max_number)'''
+print(max_number)
 
 """ task 4
 получаем в цикле 
