@@ -11,8 +11,7 @@ test_numbers = ["+380986455862", "0986455862", "098 645 5862", "098645 58_62",
 				"098 645  862", "098 645__662", "098 645 b862", "325 698 55 66"]
 
 while True:
-	number = input("Please, enter your phone number in the following format:\n"
-				   "+380_________, 0_________, 0__ ___ __ __ (where '_' is a digit)\n>")
+	number = (input("Please, enter your phone number in the following format:\n")).strip()
 
 	if number.startswith("+380"):
 		number = number.strip("+380")
