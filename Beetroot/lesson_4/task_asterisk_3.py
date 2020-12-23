@@ -6,7 +6,7 @@ max_number = None
 min_number = None
 while max_attempts > 0:
 	user_input = input("Enter any number: ")
-	if user_input.isnumeric():
+	if user_input.isdigit():
 		if max_number is None or max_number < int(user_input):
 			max_number = int(user_input)
 		if min_number is None or min_number > int(user_input):
