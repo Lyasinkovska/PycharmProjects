@@ -11,5 +11,5 @@ For example, the program obtained the word ‘hello’, so it should print 5 ran
 Tips: Use random module to get random char from string)
 """
 word = input()
-for i_ in range(5):
+for _ in range(5):
 	print("".join(random.sample(word, k=len(word))))

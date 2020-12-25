@@ -13,35 +13,38 @@ while True:
 	if user_input == "Q":
 		break
 	elif user_input in ["1", "2", "3"]:
+		comp_win = False
 		user_choice = game_elements[int(user_input) - 1]
 		print(f"Computer: {computer_choice}, User: {user_choice}")
 		if computer_choice == user_choice:
 			print("Draw.")
-		elif computer_choice == "rock":
+			continue
+
+		if computer_choice == "rock":
 			if user_choice == "scissors":
 				comp_counter += 1
-				print(f"Computer wins.")
+				comp_win = True
 			elif user_choice == "paper":
 				user_counter += 1
-				print("You win.")
 		elif computer_choice == "scissors":
 			if user_choice == "rock":
 				user_counter += 1
-				print("You win.")
 			elif user_choice == "paper":
 				comp_counter += 1
-				print(f"Computer wins.")
+				comp_win = True
 		elif computer_choice == "paper":
 			if user_choice == "rock":
 				comp_counter += 1
-				print(f"Computer wins.")
+				comp_win = True
 			elif user_choice == "scissors":
 				user_counter += 1
+
+			if computer_choice:
+				print(f"Computer wins.")
+			else:
 				print("You win.")
 	else:
 		print("Please choose correct option!")
 		continue
 
 print(f"Computer vs User ({comp_counter}:{user_counter}).")
-
-
