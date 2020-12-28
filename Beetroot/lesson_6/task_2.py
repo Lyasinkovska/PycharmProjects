@@ -40,3 +40,5 @@ prices = {
 
 tot_price = total_price(stock, prices)
 print(tot_price)
+
+
