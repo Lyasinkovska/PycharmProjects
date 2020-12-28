@@ -1,0 +1,9 @@
+"""
+Сделайте словарь дней недели {1: "Monday", 2:... } в общем словарь. И потом "переверните" чтоб было {"Monday": 1, ...
+"""
+days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+days_of_week = {i: day for i, day in zip(range(1, 8), days)}
+print(days_of_week)
+
+reversed_dict = {value: key for key, value in days_of_week.items()}
+print(reversed_dict)

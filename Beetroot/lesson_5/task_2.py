@@ -1,7 +1,7 @@
 """
 Task 2
 Exclusive common numbers.
-Generate 2 lists with the length of 10 with random integers from 1 to 10, and make a third list containing the common
+Generate 2 lists with the length of 10 with random integers from 1 to 100, and make a third list containing the common
 integers between the 2 initial lists without any duplicates.
 Constraints: use only while loop and random module to generate numbers
 
@@ -19,3 +19,5 @@ print(list3 if list3 else "No duplicates.")
 
 # option 2
 print(set(list1) & set(list2))
+# print(set(list1) | set(list2))
+# print(set(list1) - set(list2))
