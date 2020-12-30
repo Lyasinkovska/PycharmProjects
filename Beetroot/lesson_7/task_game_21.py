@@ -21,9 +21,10 @@ import random
 # list(cards.keys())#  * 4
 
 
-def count_points(card_name):
+def card_points(card_name):
 	cards = {'Ace': 11, 'King': 10, 'Queen': 10, 'Jack': 10, '10': 10, '9': 9, '8': 8, '7': 7, '6': 6, '5': 5, '4': 4,
-			 '3': 3, '2': 2}
+		'3': 3, '2': 2
+	}
 	return cards[card_name]
 
 
@@ -32,10 +33,9 @@ def shuffle_deck():
 	shuffle a deck
 	:return: shuffled deck
 	"""
-	card_list = ['Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2',
-				 'Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2',
-				 'Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2',
-				 'Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2']
+	card_list = ['Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace', 'King', 'Queen',
+		'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6',
+		'5', '4', '3', '2', 'Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2']
 	shuffled_cards = random.sample(card_list, len(card_list))
 	return shuffled_cards
 
@@ -50,16 +50,54 @@ def give_card(deck):
 		return deck.pop()
 
 
+def winner(comp_points, user_points):
+	result = f"Points: computer {comp_points}: user {user_points}\n"
+	if comp_points > 21 and user_points <= 21:
+		return f"{result}The winner is User."
+	elif user_points > 21 and comp_points <= 21:
+		return f"{result}The winner is Computer."
+	elif comp_points > 21 and user_points > 21:
+		return f"{result}It's a draw"
+	else:
+		if comp_points == user_points:
+			return f"{result}It's a draw"
+		else:
+			if user_points > 21 or comp_points > user_points:
+				return f"{result}The winner is Computer."
+			elif comp_points > 21 or comp_points < user_points:
+				return f"{result}The winner is User."
+
+
+def first_distribution(cards_amount, comp_points=0, user_points=0):
+	for i in range(cards_amount):
+		user_card = give_card(my_deck)
+		user_points += card_points(user_card)
+		comp_card = give_card(my_deck)
+		comp_points += card_points(comp_card)
+		return comp_points,  user_points
+
+
 if __name__ == '__main__':
 	my_deck = shuffle_deck()
+	comp_points, user_points = first_distribution(2)
+	print(comp_points, user_points)
+
+	while comp_points < 18:
+		comp_card = give_card(my_deck)
+		comp_points += card_points(comp_card)
+
 	while True:
-		us_input = input("Enter: ")
+		us_input = input("Enter 'y': to take a card, 'f': to finish the round. > ")
 		if us_input == 'y':
-			card = give_card(my_deck)
-			if card:
-				points = count_points(card)
-				print(card, points)
-			else:
-				break
-		else:
+			user_card = give_card(my_deck)
+			if user_card:
+				user_points += card_points(user_card)
+				print("User:", user_points)
+				if user_points > 21:
+					print(winner(comp_points, user_points))
+					break
+		elif us_input == 'f':
+			print(winner(comp_points, user_points))
 			break
+		else:
+			print("Wrong answer.")
