@@ -12,10 +12,11 @@ the call make_operation(‘*’, 7, 6) should return 42
 from lesson_4.task_5_4 import add, subtract, multiply
 
 
-def make_operation(operator, *args):
+def make_operation(operator, total, *args):
 	"""
 	takes in a simple arithmetic operator as a first parameter (to keep things simple let it only be ‘+’, ‘-’ or ‘*’)
 	and an arbitrary number of arguments (only numbers) as the second parameter
+	:type total: int
 	:param operator:
 	:param args:
 	:return: the sum or product of all the numbers in the arbitrary parameter
@@ -24,8 +25,7 @@ def make_operation(operator, *args):
 	if action is None:
 		return "The function cannot calculate it."
 	else:
-		total = args[0]
-		for number in args[1:]:
+		for number in args:
 			total = action(total, number)
 		return total
 
@@ -45,4 +45,4 @@ def get_action(action):
 if __name__ == '__main__':
 	print(make_operation("+", 7, 7, 2))
 	print(make_operation("-", 5, 5, -10, -20))
-	print(make_operation("*", 7, -6))
+	print(make_operation("*", 6, 7))
