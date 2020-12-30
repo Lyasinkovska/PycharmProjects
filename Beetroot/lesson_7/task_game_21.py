@@ -67,7 +67,7 @@ def winner(comp_points, user_points):
 			elif comp_points > 21 or comp_points < user_points:
 				return f"{result}The winner is User."
 
-def first_distribution(cards_amount):
+
 
 if __name__ == '__main__':
 	my_deck = shuffle_deck()
