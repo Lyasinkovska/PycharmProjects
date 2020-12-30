@@ -67,20 +67,19 @@ def winner(comp_points, user_points):
 			elif comp_points > 21 or comp_points < user_points:
 				return f"{result}The winner is User."
 
+def first_distribution(cards_amount):
 
-def first_distribution(cards_amount, comp_points=0, user_points=0):
+if __name__ == '__main__':
+	my_deck = shuffle_deck()
+	comp_points, user_points = 0, 0
+	cards_amount = 2
+
 	for i in range(cards_amount):
 		user_card = give_card(my_deck)
 		user_points += card_points(user_card)
 		comp_card = give_card(my_deck)
 		comp_points += card_points(comp_card)
-		return comp_points,  user_points
-
-
-if __name__ == '__main__':
-	my_deck = shuffle_deck()
-	comp_points, user_points = first_distribution(2)
-	print(comp_points, user_points)
+		print("User points: ", user_points)
 
 	while comp_points < 18:
 		comp_card = give_card(my_deck)
