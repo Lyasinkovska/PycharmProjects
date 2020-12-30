@@ -33,9 +33,7 @@ def shuffle_deck():
 	shuffle a deck
 	:return: shuffled deck
 	"""
-	card_list = ['Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace', 'King', 'Queen',
-		'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6',
-		'5', '4', '3', '2', 'Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2']
+	card_list = ['Ace', 'King', 'Queen', 'Jack', '10', '9', '8', '7', '6', '5', '4', '3', '2']*4
 	shuffled_cards = random.sample(card_list, len(card_list))
 	return shuffled_cards
 
@@ -68,35 +66,43 @@ def winner(comp_points, user_points):
 				return f"{result}The winner is User."
 
 
-
 if __name__ == '__main__':
-	my_deck = shuffle_deck()
-	comp_points, user_points = 0, 0
-	cards_amount = 2
+	exit_message = True
+	while exit_message:
+		print("LET'S PLAY!!!")
+		my_deck = shuffle_deck()
+		comp_points, user_points = 0, 0
+		cards_amount = 2
+		user_cards = []
 
-	for i in range(cards_amount):
-		user_card = give_card(my_deck)
-		user_points += card_points(user_card)
-		comp_card = give_card(my_deck)
-		comp_points += card_points(comp_card)
-		print("User points: ", user_points)
-
-	while comp_points < 18:
-		comp_card = give_card(my_deck)
-		comp_points += card_points(comp_card)
-
-	while True:
-		us_input = input("Enter 'y': to take a card, 'f': to finish the round. > ")
-		if us_input == 'y':
+		for i in range(cards_amount):
 			user_card = give_card(my_deck)
-			if user_card:
-				user_points += card_points(user_card)
-				print("User:", user_points)
-				if user_points > 21:
-					print(winner(comp_points, user_points))
-					break
-		elif us_input == 'f':
-			print(winner(comp_points, user_points))
-			break
-		else:
-			print("Wrong answer.")
+			user_cards.append(user_card)
+			user_points += card_points(user_card)
+			comp_card = give_card(my_deck)
+			comp_points += card_points(comp_card)
+		print(f"User cards: {user_cards}, user points: {user_points}")
+
+		while comp_points < 18:
+			comp_card = give_card(my_deck)
+			comp_points += card_points(comp_card)
+
+		while True:
+			us_input = input("Enter 'y': to take a card, 'f': to finish the round, 'q': to quit. > ")
+			if us_input == 'y':
+				user_card = give_card(my_deck)
+				if user_card:
+					user_points += card_points(user_card)
+					user_cards += user_card
+					print(f"User cards: {user_cards}, user points: {user_points}\n")
+					if user_points > 21:
+						print(winner(comp_points, user_points))
+						break
+			elif us_input == 'f':
+				print(winner(comp_points, user_points))
+				break
+			elif us_input == 'q':
+				exit_message = False
+				break
+			else:
+				print("Wrong answer.")
