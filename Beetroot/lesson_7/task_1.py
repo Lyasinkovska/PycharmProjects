@@ -7,7 +7,7 @@ Create a simple function called favorite_movie, which takes a string containing 
 
 
 def favourite_movie(movie_name):
-	print(f'My favorite movie is named "{movie_name}"')
+    print(f'My favorite movie is named "{movie_name}"')
 
 
-favourite_movie("The age of Adaline")
+favourite_movie("Inception")
