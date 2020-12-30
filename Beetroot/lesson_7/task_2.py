@@ -7,9 +7,9 @@ the dictionary to make sure that it works as intended.
 """
 
 
-def make_country(country_name, capital):
-	countries = {'country_name': country_name, 'capital': capital}
-	return countries
+def make_country(name, capital):
+    countries = {'country_name': name, 'capital': capital}
+    return countries
 
 
 print(make_country("Ukraine", "Kyiv"))
