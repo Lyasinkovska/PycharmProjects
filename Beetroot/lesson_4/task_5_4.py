@@ -34,7 +34,7 @@ def get_number():
 			continue
 
 
-def get_action():
+def get_action(action):
 	actions = {"+": add, "-": subtract, "*": multiply}
 	while True:
 		action = input("Enter action: ")
@@ -47,15 +47,17 @@ def get_action():
 			continue
 
 
-total = get_number()
-while True:
-	if total is None:
-		break
-	action = get_action()
-	if action is None:
-		break
-	number = get_number()
-	if number is None:
-		break
-	total = action(total, number)
-	print(f"The result is: {total}. If you want to quit enter Q.")
+if __name__ == '__main__':
+
+	total = get_number()
+	while True:
+		if total is None:
+			break
+		action = get_action()
+		if action is None:
+			break
+		number = get_number()
+		if number is None:
+			break
+		total = action(total, number)
+		print(f"The result is: {total}. If you want to quit enter Q.")
