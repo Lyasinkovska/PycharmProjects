@@ -5,14 +5,15 @@ if the two values given by the input function were not numbers, and if value b w
 """
 
 
-def square_division_of_two_numbers():
+def square_division_of_two_numbers(first_elem, second_elem):
     try:
-        a, b = map(int, (input('enter a: '), input('enter b: ')))
-        return a**2 / b
+        first_elem, second_elem = map(int, (first_elem, second_elem))
     except ZeroDivisionError:
         return "Division by zero is forbidden."
     except ValueError:
         return 'ValueError: could not convert string to integer.'
 
 
-print(square_division_of_two_numbers())
+if __name__ == '__main__':
+    a, b = input('enter a: '), input('enter b: ')
+    print(square_division_of_two_numbers())
