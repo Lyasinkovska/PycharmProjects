@@ -10,3 +10,12 @@ What if you add a different directory path to the filename passed to open?
 Note: file write methods do not add newline characters to your strings; add an explicit ‘\n’ at the end of the string
  if you want to fully terminate the line in the file.
 """
+
+
+def write_to_file(file_name, message):
+    with open(file_name, 'a') as file:
+        file.write(message+'\n')
+
+
+if __name__ == '__main__':
+    write_to_file('my_file.txt', 'Next line.')
