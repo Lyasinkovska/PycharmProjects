@@ -33,6 +33,14 @@ def search_by_key(key, value):
     return [element for element in phonebook if element.get(key) == value]
 
 
+def print_contacts(found_contact):
+    if found_contact:
+        for contact in found_contact:
+            print(contact)
+    else:
+        print("Cannot find a contact.")
+
+
 def load_jsonfile(filename='phonebook.json'):
     try:
         with open(filename) as phonebook:
@@ -61,10 +69,8 @@ if __name__ == '__main__':
     #     if item['lastname'] == 'Mamonov':
     #         print(item)
 
-    search_actions = {'sn': ['firstname', search_by_firstname], 'sl': ['lastname', search_by_lastname],
-                      'sf': ['fullname', search_by_fullname], 'snm': ['number', search_by_number],
-                      'sc': ['city', search_by_city]}
-    phonebook_keys = [key[0] for key in search_actions.values()]
+    search_actions = {'sn': 'firstname', 'sl': 'lastname', 'sf': 'fullname', 'snm': 'number', 'sc': 'city'}
+
     while True:
         phonebook = load_jsonfile('phonebook.json')
         user_choice = input(f'"cc" - create new contact,\n"sn" - search by firstname,\n"sl" - search by lastname,'
@@ -77,9 +83,9 @@ if __name__ == '__main__':
             new_contact = create_contact(firstname, lastname, fullname, number, city)
             dump_into_jsonfile(new_contact)
         elif user_choice in search_actions:
-            user_input = input(f"Enter {search_actions[user_choice][0]}: ").title().strip()
-            found_contact = search_by_key(search_actions[user_choice][0], user_input)
-            print(found_contact)
+            user_input = input(f"Enter {search_actions[user_choice]}: ").title().strip()
+            found_contact = search_by_key(search_actions[user_choice], user_input)
+            print_contacts(found_contact)
         elif user_choice == "q":
             break
     print(phonebook)
