@@ -36,9 +36,22 @@ def search_by_key(key, value):
 def print_contacts(found_contact):
     if found_contact:
         for contact in found_contact:
-            print(contact)
+            contact_index = return_index(contact, phonebook)
+            print(f'Index: {contact_index}, {contact}')
     else:
         print("Cannot find a contact.")
+
+
+def return_index(contact, phonebook):
+    return phonebook.index(contact)+1
+
+
+def delete_contact(index, phonebook):
+    try:
+        print(phonebook.pop(int(index)-1))
+    except (TypeError, IndexError):
+        print("Wrong format of index or no contacts are found.")
+    return phonebook
 
 
 def load_jsonfile(filename='phonebook.json'):
@@ -50,24 +63,31 @@ def load_jsonfile(filename='phonebook.json'):
     return data
 
 
-def dump_into_jsonfile(dictionary):
+def add_contact_to_json(contact):
     data = load_jsonfile()
-    data.append(dictionary)
+    data.append(contact)
+    return data
+
+
+def update_contact(index, firstname, lastname, fullname, number, city):
+    try:
+        phonebook[int(index)-1] = create_contact(firstname, lastname, fullname, number, city)
+    except (TypeError, IndexError):
+        print("Wrong format of index or no contacts are found.")
+    return phonebook
+
+
+def dump_into_jsonfile(jsonfile):
     try:
         with open('phonebook.json', 'w') as phonebook:
-            json.dump(data, phonebook, indent=4)
+            json.dump(jsonfile, phonebook, indent=4)
     except FileNotFoundError:
         print("The file doesn't exist.")
     else:
-        print('The information was successfully added to the phonebook.')
+        print('The the phonebook was updated.')
 
 
 if __name__ == '__main__':
-
-    # data = load_jsonfile()
-    # for item in data:
-    #     if item['lastname'] == 'Mamonov':
-    #         print(item)
 
     search_actions = {'sn': 'firstname', 'sl': 'lastname', 'sf': 'fullname', 'snm': 'number', 'sc': 'city'}
 
@@ -79,13 +99,27 @@ if __name__ == '__main__':
                             f'\n"q" - quit application\nYour choice: ')
         if user_choice == 'cc':
             firstname, lastname, fullname, number, city, = [input(f'Enter {elem}: ').title().strip() for elem in
-                                                            search_actions]
+                                                            search_actions.values()]
             new_contact = create_contact(firstname, lastname, fullname, number, city)
-            dump_into_jsonfile(new_contact)
+            dump_into_jsonfile(add_contact_to_json(new_contact))
         elif user_choice in search_actions:
             user_input = input(f"Enter {search_actions[user_choice]}: ").title().strip()
             found_contact = search_by_key(search_actions[user_choice], user_input)
             print_contacts(found_contact)
+        elif user_choice == 'd':
+            user_input = input("Enter number of a contact you want to delete: ").title().strip()
+            found_contact = search_by_key('number', user_input)
+            print_contacts(found_contact)
+            index = input(f'Please choose index of a contact you want to delete: ')
+            dump_into_jsonfile(delete_contact(index, phonebook))
+        elif user_choice == 'u':
+            user_input = input("Enter number of a contact you want to update: ").title().strip()
+            found_contact = search_by_key('number', user_input)
+            print_contacts(found_contact)
+            index = input(f'Please choose index of a contact you want to update: ')
+            firstname, lastname, fullname, number, city, = [input(f'Enter {elem}: ').title().strip() for elem in
+                                                            search_actions.values()]
+            dump_into_jsonfile(update_contact(index, firstname, lastname, fullname, number, city))
         elif user_choice == "q":
             break
     print(phonebook)
