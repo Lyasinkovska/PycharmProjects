@@ -121,4 +121,6 @@ if __name__ == '__main__':
                     dump_into_jsonfile(update_contact(index, firstname, lastname, fullname, number, city))
         elif user_choice == "q":
             break
+        else:
+            print("Wrong input. Try again.")
     print(phonebook)
