@@ -106,20 +106,19 @@ if __name__ == '__main__':
             user_input = input(f"Enter {search_actions[user_choice]}: ").title().strip()
             found_contact = search_by_key(search_actions[user_choice], user_input)
             print_contacts(found_contact)
-        elif user_choice == 'd':
-            user_input = input("Enter number of a contact you want to delete: ").title().strip()
+        elif user_choice in ('d', 'u'):
+            action = {'d': 'delete', 'u': 'update'}
+            user_input = input(f"Enter number of a contact you want to {action[user_choice]}: ").title().strip()
             found_contact = search_by_key('number', user_input)
             print_contacts(found_contact)
-            index = input(f'Please choose index of a contact you want to delete: ')
-            dump_into_jsonfile(delete_contact(index, phonebook))
-        elif user_choice == 'u':
-            user_input = input("Enter number of a contact you want to update: ").title().strip()
-            found_contact = search_by_key('number', user_input)
-            print_contacts(found_contact)
-            index = input(f'Please choose index of a contact you want to update: ')
-            firstname, lastname, fullname, number, city, = [input(f'Enter {elem}: ').title().strip() for elem in
-                                                            search_actions.values()]
-            dump_into_jsonfile(update_contact(index, firstname, lastname, fullname, number, city))
+            if found_contact:
+                index = input(f'Please choose index of a contact you want to {action[user_choice]}: ')
+                if user_choice == 'd':
+                    dump_into_jsonfile(delete_contact(index, phonebook))
+                elif user_choice == 'u':
+                    firstname, lastname, fullname, number, city, = [input(f'Enter {elem}: ').title().strip() for elem in
+                                                                    search_actions.values()]
+                    dump_into_jsonfile(update_contact(index, firstname, lastname, fullname, number, city))
         elif user_choice == "q":
             break
     print(phonebook)
