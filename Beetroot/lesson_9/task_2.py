@@ -18,6 +18,7 @@ loaded JSON.
 """
 import json
 
+DATA_FILE = 'phonebook.json'
 
 def create_contact(firstname, lastname, fullname, number, city):
     return {
@@ -54,9 +55,9 @@ def delete_contact(index, phonebook):
     return phonebook
 
 
-def load_jsonfile(filename='phonebook.json'):
+def load_jsonfile(DATA_FILE='phonebook.json', encoding='utf-8'):
     try:
-        with open(filename) as phonebook:
+        with open(DATA_FILE, encoding) as phonebook:
             data = json.load(phonebook)
     except FileNotFoundError:
         print("The file doesn't exist.")
@@ -77,10 +78,10 @@ def update_contact(index, firstname, lastname, fullname, number, city):
     return phonebook
 
 
-def dump_into_jsonfile(jsonfile):
+def dump_into_jsonfile(DATA_FILE, flag='w', encoding='utf-8'):
     try:
-        with open('phonebook.json', 'w') as phonebook:
-            json.dump(jsonfile, phonebook, indent=4)
+        with open(DATA_FILE, flag, encoding) as phonebook:
+            json.dump(DATA_FILE, phonebook, indent=4)
     except FileNotFoundError:
         print("The file doesn't exist.")
     else:
