@@ -20,6 +20,7 @@ import json
 
 DATA_FILE = 'phonebook.json'
 
+
 def create_contact(firstname, lastname, fullname, number, city):
     return {
         'firstname': firstname,
@@ -49,15 +50,23 @@ def return_index(contact, phonebook):
 
 def delete_contact(index, phonebook):
     try:
-        print(phonebook.pop(int(index)-1))
+        print(phonebook.pop(int(index) - 1))
     except (TypeError, IndexError):
         print("Wrong format of index or no contacts are found.")
     return phonebook
 
 
-def load_jsonfile(filename=DATA_FILE, encoding='utf-8'):
+def update_contact(index, firstname, lastname, fullname, number, city):
     try:
-        with open(filename, encoding) as phonebook:
+        phonebook[int(index) - 1] = create_contact(firstname, lastname, fullname, number, city)
+    except (TypeError, IndexError):
+        print("Wrong format of index or no contacts are found.")
+    return phonebook
+
+
+def load_jsonfile(filename=DATA_FILE):
+    try:
+        with open(filename) as phonebook:
             data = json.load(phonebook)
     except FileNotFoundError:
         print("The file doesn't exist.")
@@ -70,7 +79,7 @@ def add_contact_to_json(contact):
     return data
 
 
-def update_contact(index, firstname, lastname, fullname, number, city):
+def dump_into_jsonfile(data, filename=DATA_FILE, flag='w'):
     try:
         phonebook[int(index)-1] = create_contact(firstname, lastname, fullname, number, city)
     except (TypeError, IndexError):
@@ -78,10 +87,10 @@ def update_contact(index, firstname, lastname, fullname, number, city):
     return phonebook
 
 
-def dump_into_jsonfile(filename=DATA_FILE, flag='w', encoding='utf-8'):
+def dump_into_jsonfile(jsonfile):
     try:
-        with open(filename, flag, encoding) as phonebook:
-            json.dump(filename, phonebook, indent=4)
+        with open('phonebook.json', 'w') as phonebook:
+            json.dump(jsonfile, phonebook, indent=4)
     except FileNotFoundError:
         print("The file doesn't exist.")
     else:
@@ -91,13 +100,23 @@ def dump_into_jsonfile(filename=DATA_FILE, flag='w', encoding='utf-8'):
 if __name__ == '__main__':
 
     search_actions = {'sn': 'firstname', 'sl': 'lastname', 'sf': 'fullname', 'snm': 'number', 'sc': 'city'}
-
+    menu = '''
+"cc" : create new contact,
+"sn" : search by firstname,
+"sl" : search by lastname,
+"sf" : search by fullname,
+"snm" : search by number,
+"sc" : search by city,
+"d" : delete record,
+"u" : update record,
+"pr" : print phonebook,
+"q" : quit application
+Your choice: 
+'''
     while True:
         phonebook = load_jsonfile('phonebook.json')
-        user_choice = input(f'"cc" - create new contact,\n"sn" - search by firstname,\n"sl" - search by lastname,'
-                            f'\n"sf" - search by fullname,\n"snm" - search by number,\n"sc" - search by city,'
-                            f'\n"d" - delete record,\n"u" - update record,\n"pr" - print phonebook'
-                            f'\n"q" - quit application\nYour choice: ')
+        user_choice = input(menu)
+
         if user_choice == 'cc':
             firstname, lastname, fullname, number, city, = [input(f'Enter {elem}: ').title().strip() for elem in
                                                             search_actions.values()]
@@ -115,6 +134,7 @@ if __name__ == '__main__':
             if found_contact:
                 index = input(f'Please choose index of a contact you want to {action[user_choice]}: ')
                 if user_choice == 'd':
+
                     dump_into_jsonfile(delete_contact(index, phonebook))
                 elif user_choice == 'u':
                     firstname, lastname, fullname, number, city, = [input(f'Enter {elem}: ').title().strip() for elem in
