@@ -55,9 +55,9 @@ def delete_contact(index, phonebook):
     return phonebook
 
 
-def load_jsonfile(DATA_FILE='phonebook.json', encoding='utf-8'):
+def load_jsonfile(filename=DATA_FILE, encoding='utf-8'):
     try:
-        with open(DATA_FILE, encoding) as phonebook:
+        with open(filename, encoding) as phonebook:
             data = json.load(phonebook)
     except FileNotFoundError:
         print("The file doesn't exist.")
@@ -78,10 +78,10 @@ def update_contact(index, firstname, lastname, fullname, number, city):
     return phonebook
 
 
-def dump_into_jsonfile(DATA_FILE, flag='w', encoding='utf-8'):
+def dump_into_jsonfile(filename=DATA_FILE, flag='w', encoding='utf-8'):
     try:
-        with open(DATA_FILE, flag, encoding) as phonebook:
-            json.dump(DATA_FILE, phonebook, indent=4)
+        with open(filename, flag, encoding) as phonebook:
+            json.dump(filename, phonebook, indent=4)
     except FileNotFoundError:
         print("The file doesn't exist.")
     else:
