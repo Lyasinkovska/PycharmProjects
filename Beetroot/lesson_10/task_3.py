@@ -20,12 +20,11 @@ controller = TVController(CHANNELS)
 
 class TVController:
 
-    counter = -1
 
     def __init__(self, channels):
         self.channels = channels
         self.length = len(self.channels)
-        self.counter = 0
+        self.counter = -1
 
     def first_channel(self):
         return self.channels[0]
@@ -34,11 +33,11 @@ class TVController:
         return self.channels[-1]
 
     def next_channel(self):
-        TVController.counter += 1
+        self.counter += 1
         while True:
-            if TVController.counter == self.length:
-                TVController.counter = 0
-            return self.channels[TVController.counter]
+            if self.counter == self.length:
+                self.counter = 0
+            return self.channels[self.counter]
 
     def previous_channel(self):
         pass
@@ -54,9 +53,13 @@ if __name__ == '__main__':
 
     CHANNELS = ["BBC", "Discovery", "TV1000"]
     controller = TVController(CHANNELS)
+    ddd = TVController(CHANNELS)
     print(controller.first_channel())
     print(controller.last_channel())
     for i in range(10):
         print(controller.next_channel())
     print(controller.is_exist('BBC'))
     print(controller.is_exist('BBS'))
+
+
+
