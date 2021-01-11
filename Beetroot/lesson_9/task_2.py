@@ -20,6 +20,20 @@ import json
 
 DATA_FILE = 'phonebook.json'
 
+MENU = '''
+"cc" : create new contact,
+"sn" : search by firstname,
+"sl" : search by lastname,
+"sf" : search by fullname,
+"snm" : search by number,
+"sc" : search by city,
+"d" : delete record,
+"u" : update record,
+"pr" : print phonebook,
+"q" : quit application
+Your choice: 
+'''
+
 
 def create_contact(firstname, lastname, fullname, number, city):
     return {
@@ -79,14 +93,6 @@ def add_contact_to_json(contact):
     return data
 
 
-def dump_into_jsonfile(data, filename=DATA_FILE, flag='w'):
-    try:
-        phonebook[int(index)-1] = create_contact(firstname, lastname, fullname, number, city)
-    except (TypeError, IndexError):
-        print("Wrong format of index or no contacts are found.")
-    return phonebook
-
-
 def dump_into_jsonfile(jsonfile):
     try:
         with open('phonebook.json', 'w') as phonebook:
@@ -100,22 +106,10 @@ def dump_into_jsonfile(jsonfile):
 if __name__ == '__main__':
 
     search_actions = {'sn': 'firstname', 'sl': 'lastname', 'sf': 'fullname', 'snm': 'number', 'sc': 'city'}
-    menu = '''
-"cc" : create new contact,
-"sn" : search by firstname,
-"sl" : search by lastname,
-"sf" : search by fullname,
-"snm" : search by number,
-"sc" : search by city,
-"d" : delete record,
-"u" : update record,
-"pr" : print phonebook,
-"q" : quit application
-Your choice: 
-'''
+
     while True:
         phonebook = load_jsonfile('phonebook.json')
-        user_choice = input(menu)
+        user_choice = input(MENU)
 
         if user_choice == 'cc':
             firstname, lastname, fullname, number, city, = [input(f'Enter {elem}: ').title().strip() for elem in
@@ -144,4 +138,3 @@ Your choice:
             break
         else:
             print("Wrong input. Try again.")
-    print(phonebook)
