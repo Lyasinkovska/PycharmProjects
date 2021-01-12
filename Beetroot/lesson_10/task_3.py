@@ -20,46 +20,53 @@ controller = TVController(CHANNELS)
 
 class TVController:
 
-
     def __init__(self, channels):
         self.channels = channels
-        self.length = len(self.channels)
-        self.counter = -1
+        self.position = 0
 
     def first_channel(self):
-        return self.channels[0]
+        self.position = 1
+        return self.current_channel
 
     def last_channel(self):
-        return self.channels[-1]
+        self.position = len(self.channels) - 1
+        return self.current_channel
 
     def next_channel(self):
-        self.counter += 1
-        while True:
-            if self.counter == self.length:
-                self.counter = 0
-            return self.channels[self.counter]
+        if self.position != len(self.channels) - 1:
+            self.position += 1
+        else:
+            self.position = 0
+        return self.current_channel
 
     def previous_channel(self):
-        pass
+        if self.position != 0:
+            self.position -= 1
+        else:
+            self.position = len(self.channels) - 1
+        return self.current_channel
 
+    @property
     def current_channel(self):
-        pass
+        return self.channels[self.position]
 
     def is_exist(self, name):
-        return 'Yes' if name in self.channels else 'No'
+        return 'Yes' if name in range(len(self.channels)) or name in self.channels else 'No'
 
 
 if __name__ == '__main__':
 
-    CHANNELS = ["BBC", "Discovery", "TV1000"]
+    CHANNELS = ["BBC", "Discovery", "TV1000", "hhh"]
     controller = TVController(CHANNELS)
-    ddd = TVController(CHANNELS)
-    print(controller.first_channel())
-    print(controller.last_channel())
-    for i in range(10):
-        print(controller.next_channel())
+    print('current', controller.current_channel)
+    print('last', controller.last_channel())
+    for i in range(5):
+        print('next', controller.next_channel())
+    print('first', controller.first_channel())
+    for i in range(5):
+        print('previous', controller.previous_channel())
+    print('current', controller.current_channel)
     print(controller.is_exist('BBC'))
     print(controller.is_exist('BBS'))
-
-
-
+    print(controller.is_exist(1))
+    print(controller.is_exist(15))

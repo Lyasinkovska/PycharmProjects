@@ -12,7 +12,7 @@ class Dog:
         self.dog_age = dog_age
 
     def human_age(self):
-        return self.dog_age * Dog.age_factor
+        return self.dog_age * self.age_factor
 
 
 if __name__ == '__main__':
