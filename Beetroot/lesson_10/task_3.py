@@ -33,11 +33,11 @@ class TVController:
         return self.current_channel()
 
     def next_channel(self):
-        self.position = (self.position + 1) if self.position != len(self.channels) - 1 else 0
+        self.position = (self.position + 1) % len(self.channels)
         return self.current_channel()
 
     def previous_channel(self):
-        self.position = (self.position - 1) if self.position != 0 else (len(self.channels) - 1)
+        self.position = (self.position - 1) % len(self.channels)
         return self.current_channel()
 
     def current_channel(self):
