@@ -25,7 +25,7 @@ class TVController:
         self.position = 0
 
     def first_channel(self):
-        self.position = 1
+        self.position = 0
         return self.current_channel
 
     def last_channel(self):
@@ -56,7 +56,7 @@ class TVController:
 
 if __name__ == '__main__':
 
-    CHANNELS = ["BBC", "Discovery", "TV1000", "hhh"]
+    CHANNELS = ["BBC", "Discovery", "TV1000"]
     controller = TVController(CHANNELS)
     print('current', controller.current_channel)
     print('last', controller.last_channel())
