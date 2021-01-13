@@ -17,6 +17,7 @@ class CustomException(Exception):
     def add_log_msg(self, msg):
         with open('logs.txt', 'a') as logs:
             logs.write(f'{datetime.today()}: {msg} \n')
+        print(f'The log message "{msg}" was added.')
 
 
 if __name__ == '__main__':
