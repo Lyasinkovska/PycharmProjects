@@ -52,12 +52,6 @@ class ShopProductPrice:
         self.price = product.price
         self.premium = premium
 
-    def new_price(self):
-        pass
-
-    def current_price(self):
-        return max(self.product.price * (1 + self.premium / 100), self.price * (1 + self.premium / 100))
-
 
 class ProductStore:
 
@@ -68,21 +62,28 @@ class ProductStore:
 
     def add(self, product: Product, amount):
         if product.name not in self.products:
-            self.products.update({product.name: {'amount': amount, 'price': product.price * (1 + self.premium / 100)}})
+            self.products.update({product.name: {'amount': amount,
+                                                 'price': product.price * (1 + self.premium / 100),
+                                                 'type': product.product_type}})
         else:
             self.products[product.name]['amount'] += amount
             self.products[product.name]['price'] = max(product.price * (1 + self.premium / 100),
                                                        self.products[product.name]['price'])
+            self.products[product.name]['type'] = product.product_type
 
     def set_discount(self, identifier, percent, identifier_type='name'):
-        pass
+        if identifier in self.products:
+            self.products.update({identifier: {'price': self.products[identifier]['price'] * (1 - percent/100)}})
+        for item, value in self.products.items():
+            if value.get(identifier_type) == identifier:
+                self.products[item]['price'] = round(self.products[item]['price'] * (1 - percent / 100), 2)
 
     def sell_product(self, product_name, amount):
         if product_name in self.products:
             self.products[product_name]['amount'] -= amount
             self.income += self.products[product_name].get('price') * amount
         else:
-            raise NotImplementedError('Wrong amount.')
+            raise ValueError('Wrong amount.')
 
     def get_income(self):
         return self.income
@@ -100,14 +101,16 @@ class ProductStore:
 if __name__ == '__main__':
     t_shirt = Product('Sport', 'Football T-Shirt', 100)
     t_shirt_2 = Product('Sport', 'Football T-Shirt', 50)
+    pasta = Product('Food', 'Pasta', 5)
     ramen = Product('Food', 'Ramen', 2)
     pr_store = ProductStore()
     pr_store.add(t_shirt, 100)
-    pr_store.add(t_shirt_2, 100)
+    pr_store.add(t_shirt_2, 200)
     pr_store.add(ramen, 30)
+    pr_store.add(pasta, 50)
     print(pr_store.products)
-    print(pr_store.get_all_products())
-    pr_store.sell_product('Ramen', 2)
-    pr_store.sell_product('Football T-Shirt', 10)
+    pr_store.set_discount('Food', 10, 'type')
+    pr_store.sell_product('Pasta', 5)
     print(pr_store.products)
     print(pr_store.get_income())
+
