@@ -19,6 +19,7 @@ class CustomException(Exception):
             logs.write(f'{datetime.today()}: {msg} \n')
 
 
-first_exception = CustomException('First Error')
-second = CustomException('Second error')
-CustomException.add_log_msg(first_exception, "Custom")
+if __name__ == '__main__':
+    first_exception = CustomException('First Error')
+    second = CustomException('Second error')
+    CustomException.add_log_msg(first_exception, "Custom")
