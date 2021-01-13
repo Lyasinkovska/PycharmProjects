@@ -53,17 +53,17 @@ class ProductStore:
         self.income = 0
         self.price = 0
 
-    def current_price(self):
-        pass
+    def shop_price(self, price):
+        return price * (1 + self.premium / 100)
 
     def add(self, product: Product, amount):
         if product.name not in self.products:
             self.products.update({product.name: {'amount': amount,
-                                                 'price': product.price * (1 + self.premium / 100),
+                                                 'price': self.shop_price(product.price),
                                                  'type': product.product_type}})
         else:
             self.products[product.name]['amount'] += amount
-            self.products[product.name]['price'] = max(product.price * (1 + self.premium / 100),
+            self.products[product.name]['price'] = max(self.shop_price(product.price),
                                                        self.products[product.name]['price'])
             self.products[product.name]['type'] = product.product_type
 
@@ -96,11 +96,14 @@ class ProductStore:
 
 if __name__ == '__main__':
     t_shirt = Product('Sport', 'Football T-Shirt', 100)
-    t_shirt_2 = Product('Sport', 'Football T-Shirt', 50)
+
+    t_shirt_2 = Product('Sport', 'Football T-Shirt', 200)
     pasta = Product('Food', 'Pasta', 5)
+
     ramen = Product('Food', 'Ramen', 2)
     pr_store = ProductStore()
     pr_store.add(t_shirt, 100)
+    print(pr_store.products)
     pr_store.add(t_shirt_2, 200)
     pr_store.add(ramen, 30)
     pr_store.add(pasta, 50)
