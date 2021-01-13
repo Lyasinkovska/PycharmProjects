@@ -45,20 +45,16 @@ class Product:
         self.price = price
 
 
-class ShopProductPrice:
-
-    def __init__(self, product: Product, premium):
-        self.product = product
-        self.price = product.price
-        self.premium = premium
-
-
 class ProductStore:
 
     def __init__(self, premium=30):
         self.premium = premium
         self.products = {}
         self.income = 0
+        self.price = 0
+
+    def current_price(self):
+        pass
 
     def add(self, product: Product, amount):
         if product.name not in self.products:
