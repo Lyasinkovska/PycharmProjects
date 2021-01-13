@@ -62,3 +62,4 @@ if __name__ == '__main__':
     print(controller.is_exist('BBS'))
     print(controller.is_exist(1))
     print(controller.is_exist(15))
+
