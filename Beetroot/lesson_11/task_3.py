@@ -75,7 +75,7 @@ class ProductStore:
                 self.products[item]['price'] = round(self.products[item]['price'] * (1 - percent / 100), 2)
 
     def sell_product(self, product_name, amount):
-        if product_name in self.products:
+        if product_name in self.products and amount >= self.products[product_name]['amount']:
             self.products[product_name]['amount'] -= amount
             self.income += self.products[product_name].get('price') * amount
         else:
