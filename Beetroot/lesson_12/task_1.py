@@ -29,7 +29,7 @@ class Cat(Animal):
         return 'Meow'
 
 
-def print_talk(animal):
+def print_talk(animal: Animal):
     print(animal.talk())
 
 
