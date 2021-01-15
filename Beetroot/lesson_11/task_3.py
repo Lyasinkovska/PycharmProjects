@@ -22,19 +22,6 @@ get_income() - returns amount of many earned by ProductStore instance.
 get_all_products() - returns information about all available products in the store.
 get_product_info(product_name) - returns a tuple with product name and amount of items in the store. ```
 
-class Product:
-    pass
-
-class ProductStore:
-pass
-
-p = Product('Sport', 'Football T-Shirt', 100)
-p2 = Product(Food, 'Ramen, 1.5)
-s = ProductStore()
-s.add(p, 10)
-s.add(p2, 300)
-s.sell(‘Ramen’, 10)
-assert s.get_product_info(‘Ramen’) == (‘Ramen’, 290)
 """
 
 
