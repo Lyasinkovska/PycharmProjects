@@ -45,71 +45,95 @@ class Product:
         self.price = price
 
 
+class StoreProduct:
+
+    def __init__(self, prod: Product):
+        self.prod = prod
+        self.price = prod.price
+        self.name = self.prod.name
+        self.premium = 30
+        self.amount = 0
+
+    @property
+    def hash(self):
+        return self.name, self.prod.product_type
+
+    def set_shop_price(self, premium: int or float):
+        return round(self.price * (1 + premium / 100), 2)
+
+    def current_shop_price(self, old_price, premium=30):
+        return max(old_price, self.set_shop_price(premium))
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return f"{self.prod.product_type}, {self.prod.name}, {self.price}, {self.amount}"
+
+
 class ProductStore:
 
-    def __init__(self, premium=30):
-        self.premium = premium
+    def __init__(self):
         self.products = {}
         self.income = 0
-        self.price = 0
+        self.premium = 30
 
-    def shop_price(self, price):
-        return price * (1 + self.premium / 100)
-
-    def add(self, product: Product, amount):
-        if product.name not in self.products:
-            self.products.update({product.name: {'amount': amount,
-                                                 'price': self.shop_price(product.price),
-                                                 'type': product.product_type}})
+    def add(self, product: Product, amount: int):
+        shop_product = StoreProduct(product)
+        shop_key = shop_product.hash
+        if shop_product.hash not in self.products.keys():
+            self.products.update({shop_key: shop_product})
+            shop_product.amount = amount
+            shop_product.price = shop_product.set_shop_price(self.premium)
         else:
-            self.products[product.name]['amount'] += amount
-            self.products[product.name]['price'] = max(self.shop_price(product.price),
-                                                       self.products[product.name]['price'])
-            self.products[product.name]['type'] = product.product_type
+            self.products[shop_key].amount += amount
+            self.products[shop_key].price = shop_product.current_shop_price(self.products[shop_key].price)
 
     def set_discount(self, identifier, percent, identifier_type='name'):
-        if identifier in self.products:
-            self.products.update({identifier: {'price': self.products[identifier]['price'] * (1 - percent/100)}})
-        for item, value in self.products.items():
-            if value.get(identifier_type) == identifier:
-                self.products[item]['price'] = round(self.products[item]['price'] * (1 - percent / 100), 2)
+        for key, product in self.products.items():
+            if identifier in key:
+                product.price = product.set_shop_price(-percent)
 
     def sell_product(self, product_name, amount):
-        if product_name in self.products and amount >= self.products[product_name]['amount']:
-            self.products[product_name]['amount'] -= amount
-            self.income += self.products[product_name].get('price') * amount
-        else:
-            raise ValueError('Wrong amount.')
+        for key, product in self.products.items():
+            if product_name in key[0] and amount <= product.amount:
+                product.amount -= amount
+                self.income += product.price * amount
+                break
+            else:
+                raise ValueError('No such product found.')
 
     def get_income(self):
         return self.income
 
     def get_all_products(self):
-        return self.products.keys()
+        return self.products
 
     def get_product_info(self, product_name):
         try:
-            return product_name, self.products[product_name].get('amount')
+            for key, product in self.products.items():
+                if product_name in key[0]:
+                    return product.name, product.amount
         except Exception:
             raise ValueError("There is no such product in a store.")
 
 
 if __name__ == '__main__':
-    t_shirt = Product('Sport', 'Football T-Shirt', 100)
+    store = ProductStore()
+    p = Product('Food', 'Ramen', 2)
+    p3 = Product('Food', 'Ramen', 10)
+    p2 = Product('Food', 'Pasta', 5)
+    p4 = Product('Sport', 'Jeans', 150)
+    store.add(p, 100)
+    store.add(p, 20)
+    store.add(p3, 20)
+    store.add(p2, 50)
+    store.add(p4, 10)
+    print(store.products)
+    store.set_discount('Food', 10)
+    store.sell_product('Ramen', 50)
+    print(store.income)
+    print(store.products)
+    print(store.get_product_info('Ramen'))
 
-    t_shirt_2 = Product('Sport', 'Football T-Shirt', 200)
-    pasta = Product('Food', 'Pasta', 5)
-
-    ramen = Product('Food', 'Ramen', 2)
-    pr_store = ProductStore()
-    pr_store.add(t_shirt, 100)
-    print(pr_store.products)
-    pr_store.add(t_shirt_2, 200)
-    pr_store.add(ramen, 30)
-    pr_store.add(pasta, 50)
-    print(pr_store.products)
-    pr_store.set_discount('Food', 10, 'type')
-    pr_store.sell_product('Pasta', 5)
-    print(pr_store.products)
-    print(pr_store.get_income())
 
