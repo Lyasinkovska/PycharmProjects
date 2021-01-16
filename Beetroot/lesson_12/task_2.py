@@ -17,16 +17,16 @@ All 3 classes must have a readable __repr__ and __str__ methods.
 Also, the book class should have a class variable which holds the amount of all existing books
 
 """
-from datetime import date
+from datetime import datetime
 
 
 class Author:
-    def __init__(self, name: str, country: str, birthday: tuple, books: list):
+    def __init__(self, name: str, country: str, birthday: str, books: list):
 
         self.name = name
         self.country = country
         try:
-            self.birthday = date(*birthday)
+            self.birthday = datetime.strptime(birthday, '%Y-%m-%d').date()
         except Exception:
             print('Wrong birthday format.')
             self.birthday = '0000-00-00'
@@ -94,9 +94,9 @@ class Library:
 
 
 if __name__ == '__main__':
-    author1 = Author("Stephen King", 'USA', (1947, 9, 21), ['The Shining', 'Under the Dome', 'Pet Sematary',
+    author1 = Author("Stephen King", 'USA', '1947-9-21', ['The Shining', 'Under the Dome', 'Pet Sematary',
                                                             'Castle Rock'])
-    author2 = Author('Fredrik Backman', 'Sweden', (1981, 6, 2), ['A Man Called Ove', 'Britt-Marie Was Here',
+    author2 = Author('Fredrik Backman', 'Sweden', '1981-6-2', ['A Man Called Ove', 'Britt-Marie Was Here',
                                                                  'My Grandmother Asked Me to Tell You She\'s Sorry',
                                                                  'Us Against You'])
     library = Library('Central Library')
