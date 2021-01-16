@@ -61,11 +61,10 @@ class Library:
         self.books = []
         self.authors = []
 
-    def new_book(self, name: str, year: int, author: Author):
+    def new_book(self, new_book: Book):
         """
         returns an instance of Book class and adds the book to the books list for the current library.
         """
-        new_book = Book(name, year, author)
         if new_book.name in new_book.author.books:
             self.books.append(new_book)
         else:
@@ -100,16 +99,20 @@ if __name__ == '__main__':
                                                                  'My Grandmother Asked Me to Tell You She\'s Sorry',
                                                                  'Us Against You'])
     library = Library('Central Library')
-    library.new_book('Castle Rock', 2018, author1)
-    library.new_book('A Man Called Ove', 2013, author2)
-    library.new_book('Britt-Marie Was Here', 2016, author2)
-    library.new_book('Us Against You', 2018, author2)
+    book1 = Book('Castle Rock', 2018, author1)
+    book2 = Book('A Man Called Ove', 2013, author2)
+    book3 = Book('Britt-Marie Was Here', 2016, author2)
+    book4 = Book('Us Against You', 2018, author2)
+    library.new_book(book1)
+    library.new_book(book2)
+    library.new_book(book3)
+    library.new_book(book4)
     print(library.group_by_author(author2))
     print(library.group_by_year(2010))
     print(library)
     print(author2.birthday)
     print(author1.birthday)
-    author3 = Author("Name", "USA", (1,), [])
+    author3 = Author("Name", "USA", '-', [])
     print(author3.birthday)
     print(Book.books_amount)
 
