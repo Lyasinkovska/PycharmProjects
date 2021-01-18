@@ -29,7 +29,7 @@ class Author:
             self.birthday = datetime.strptime(birthday, '%Y-%m-%d').date()
         except Exception:
             print('Wrong birthday format.')
-            self.birthday = '0000-00-00'
+            self.birthday = datetime.strptime('0001-01-01', '%Y-%m-%d').date()
         self.books = books
 
     def __str__(self):
@@ -75,14 +75,14 @@ class Library:
         """
         returns a list of all books grouped by the specified author
         """
-        return list(filter(lambda book: book.author == author, self.books)) or 'No results found'
+        return list(filter(lambda book: book.author == author, self.books))
         # return [book for book in self.books if book.author == author]
 
     def group_by_year(self, year: int):
         """
         returns a list of all the books grouped by the specified year
         """
-        return list(filter(lambda book: book.year == year, self.books)) or 'No results found.'
+        return list(filter(lambda book: book.year == year, self.books))
         # return [book for book in self.books if book.year == year]
 
     def __str__(self):

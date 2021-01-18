@@ -79,5 +79,7 @@ if __name__ == '__main__':
     print(y)
     print(Fraction(3 / 4))
     print(x < y, x > y, x <= y, x >= y, x == y, x != y)
+    print(Fraction('Hello ' + 'world'))
     print(x + y == 0.75)
+
 
