@@ -9,25 +9,28 @@ assert choose_func(nums2, square_nums, remove_negatives) == [1, 3, 5]
 """
 
 
+def is_all_positive(nums: list):
+    return all(map(lambda elem: elem > 0, nums))
+
+
 def choose_func(nums: list, func1, func2):
-    is_all_positive = all(map(lambda elem: elem > 0, nums))
-    if is_all_positive:
-        return func1(nums)
-    return func2(nums)
+    funcs = {True: func1, False: func2}
+    return funcs.get(is_all_positive(nums))(nums)
 
 
-def square_nums(nums):
+def square_nums(nums: list):
     return [num ** 2 for num in nums]
 
 
-def remove_negatives(nums):
+def remove_negatives(nums: list):
     return [num for num in nums if num > 0]
 
 
 if __name__ == '__main__':
     nums1 = [1, 2, 3, 4, 5]
     nums2 = [1, -2, 3, -4, 5]
-    x = choose_func
-    print(x(nums1, square_nums, remove_negatives))
+    x = choose_func(nums1, square_nums, remove_negatives)
+    print(x)
     y = choose_func(nums2, square_nums, remove_negatives)
     print(y)
+    print(choose_func([], square_nums, remove_negatives))
