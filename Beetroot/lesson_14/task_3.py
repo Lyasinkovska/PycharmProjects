@@ -12,7 +12,7 @@ return the result.
 import functools
 
 
-def arg_rules(_func=None, *, type_: type = str, max_length: int = 25, contains: list):
+def arg_rules(type_: type, max_length: int, contains: list):
     def decorator_arg_rules(func):
         @functools.wraps(func)
         def wrapper_arg_rules(*args, **kwargs):
@@ -26,10 +26,7 @@ def arg_rules(_func=None, *, type_: type = str, max_length: int = 25, contains: 
 
         return wrapper_arg_rules
 
-    if _func is None:
-        return decorator_arg_rules
-    else:
-        return decorator_arg_rules(_func)
+    return decorator_arg_rules
 
 
 @arg_rules(type_=str, max_length=15, contains=['05', '@'])
