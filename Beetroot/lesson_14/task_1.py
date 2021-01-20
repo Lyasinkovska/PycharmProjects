@@ -37,9 +37,21 @@ def fibonacci_number(index):
     a, b = 0, 1
     for _ in range(index - 2):
         a, b = b, a + b
-    print(f'{index} element of Fibonacci numbers is: {b}')
+    print(f'{index} element of Fibonacci sequence is {b}')
     return 0 if index == 1 else b
+
+
+@print_function
+def square_all(*args):
+    return [arg ** 2 for arg in args]
+
+
+@print_function
+def add(x, y):
+    return x + y
 
 
 if __name__ == '__main__':
     fibonacci_number(8)
+    square_all(1, 3, 8)
+    add(2, 9)
