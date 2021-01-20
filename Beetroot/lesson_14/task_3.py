@@ -23,9 +23,7 @@ def arg_rules(type_: type, max_length: int, contains: list):
                 return func(*args, **kwargs)
             else:
                 return check_result
-
         return wrapper_arg_rules
-
     return decorator_arg_rules
 
 
