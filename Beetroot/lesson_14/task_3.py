@@ -16,7 +16,7 @@ def arg_rules(type_: type, max_length: int, contains: list):
     def decorator_arg_rules(func):
         @functools.wraps(func)
         def wrapper_arg_rules(*args, **kwargs):
-            string_to_check = repr(args[0])
+            string_to_check = args[0]
             check_result = type(string_to_check) == type_ and len(string_to_check) <= max_length and all(
                 elem in string_to_check for elem in contains)
             if check_result:
