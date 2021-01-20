@@ -21,9 +21,12 @@ from functools import wraps
 
 def print_function(func):
     @wraps(func)
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
         func(*args)
-        print(func.__name__, 'called', *args)
+        args_repr = [repr(a) for a in args]
+        kwargs_repr = [f"{k}={v!r}" for k, v in kwargs.items()]
+        arguments = ", ".join(args_repr + kwargs_repr)
+        print(f"{func.__name__} called {arguments}")
         return func
 
     return wrapper
@@ -34,8 +37,9 @@ def fibonacci_number(index):
     a, b = 0, 1
     for _ in range(index - 2):
         a, b = b, a + b
+    print(f'{index} element of Fibonacci numbers is: {b}')
     return 0 if index == 1 else b
 
 
 if __name__ == '__main__':
-    fibonacci_number(4)
+    fibonacci_number(8)
