@@ -10,7 +10,12 @@ class InRange:
         self.start = 0
         self.step = 1
         self.stop = None
+        self.check_type()
         self.check_len_arguments()
+
+    def check_type(self):
+        if not any(isinstance(arg, int) for arg in self.arguments):
+            raise TypeError('Must be integer')
 
     def check_len_arguments(self):
         if len(self.arguments) == 1 and self.arguments[0] > 0:
@@ -48,7 +53,7 @@ class InRange:
 
 
 if __name__ == '__main__':
-    my = InRange(5, 21, 2)
+    my = InRange()
     print(my.start, my.stop, my.step)
     for i in my:
         print(i)
