@@ -6,54 +6,54 @@ Create your own implementation of a built-in function range, named in_range(), w
 
 class InRange:
     def __init__(self, *args: int):
-        self.arguments = args
-        self.start = 0
-        self.step = 1
-        self.stop = None
+        self.__arguments = args
+        self.__start = 0
+        self.__step = 1
         self.check_type()
-        self.check_len_arguments()
+        self.__result = list(self.check_arguments())
 
     def check_type(self):
-        if not any(isinstance(arg, int) for arg in self.arguments):
+        if not any(isinstance(arg, int) for arg in self.__arguments):
             raise TypeError('Must be integer')
 
-    def check_len_arguments(self):
-        if len(self.arguments) == 1 and self.arguments[0] > 0:
-            self.stop = self.arguments[0]
-        elif len(self.arguments) == 2 and self.arguments[0] < self.arguments[1]:
-            self.start = self.arguments[0]
-            self.stop = self.arguments[1]
-        elif len(self.arguments) == 3 and (self.arguments[0] < self.arguments[1] and self.arguments[2] > 0) \
-            or (len(self.arguments) == 3 and self.arguments[0] > self.arguments[1] and self.arguments[2] < 0):
-            self.start = self.arguments[0]
-            self.stop = self.arguments[1]
-            self.step = self.arguments[2]
-        elif self.step == 0:
-            raise Exception('Step cannot be 0')
+    def check_arguments(self):
+        if len(self.__arguments) == 1 and self.__arguments[0] > 0:
+            self.__stop = self.__arguments[0]
+        elif len(self.__arguments) == 2 and self.__arguments[0] < self.__arguments[1]:
+            self.__start = self.__arguments[0]
+            self.__stop = self.__arguments[1]
+        elif (len(self.__arguments) == 3 and self.__arguments[0] < self.__arguments[1] and self.__arguments[2] > 0) or (
+            len(self.__arguments) == 3 and self.__arguments[0] > self.__arguments[1] and self.__arguments[2] < 0):
+            self.__start = self.__arguments[0]
+            self.__stop = self.__arguments[1]
+            self.__step = self.__arguments[2]
         else:
-            raise Exception('Wrong arguments')
-
-    def __next__(self):
-        result = self.__iter__()
-        for element in result:
-            return element
-        raise StopIteration
+            raise Exception("Wrong arguments")
+        return self.__start - self.__step, self.__stop, self.__step
 
     def __iter__(self):
-        self.start -= self.step
-        self.stop -= self.step
-        if self.start < self.stop:
-            while self.start < self.stop:
-                self.start += self.step
-                yield self.start
-        else:
-            while self.start > self.stop:
-                self.start += self.step
-                yield self.start
+        return self
+
+    def __next__(self):
+        if self.__result[0] > self.__result[1]:
+            while self.__result[0] + self.__result[2] > self.__result[1]:
+                self.__result[0] += self.__result[2]
+                return self.__result[0]
+        elif self.__result[0] < self.__result[1]:
+            while self.__result[0] + self.__result[2] < self.__result[1]:
+                self.__result[0] += self.__result[2]
+                return self.__result[0]
+        raise StopIteration
 
 
 if __name__ == '__main__':
-    my = InRange()
-    print(my.start, my.stop, my.step)
+    my = InRange(110, 15, -10)
+    for i in range(2):
+        print(next(my))
     for i in my:
         print(i)
+
+    new_range = InRange(5)
+    for i in new_range:
+        print(i)
+
