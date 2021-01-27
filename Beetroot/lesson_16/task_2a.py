@@ -3,7 +3,7 @@ class InRange:
         self.__start = start
         self.__stop = stop
         self.__step = step
-        self.__range = [item for item in self]
+        self.__range = []
 
     @property
     def range(self):
@@ -13,12 +13,15 @@ class InRange:
         return self
 
     def __next__(self):
-        if (self.__step > 0 and self.__start >= self.__stop) or (self.__step < 0 and self.__start <= self.__stop):
+        if self.__step > 0 and self.__start >= self.__stop or (self.__step < 0 and self.__start <= self.__stop):
             raise StopIteration
+
         if self.__step == 0:
             raise ValueError("Step cannot be 0")
+
         current = self.__start
         self.__start += self.__step
+        self.__range.append(current)
         return current
 
     def __contains__(self, item):
@@ -26,7 +29,11 @@ class InRange:
 
 
 if __name__ == '__main__':
-    my_range = InRange(0, 12, 5)
+    my_range = InRange(0, 13, 5)
+    for i in my_range:
+        print(i)
     print(my_range.range)
     print(5 in my_range)
     print(2 in my_range)
+
+
