@@ -5,6 +5,10 @@ class InRange:
         self.__step = step
         self.__range = [item for item in self]
 
+    @property
+    def range(self):
+        return self.__range
+
     def __iter__(self):
         return self
 
@@ -27,5 +31,6 @@ class InRange:
 
 if __name__ == '__main__':
     my_range = InRange(0, 12, 5)
+    print(my_range.range)
     print(5 in my_range)
     print(2 in my_range)
