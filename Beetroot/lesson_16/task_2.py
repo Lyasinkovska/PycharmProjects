@@ -18,24 +18,29 @@ class InRange:
     def __iter__(self):
         return self
 
+    def is_valid_arguments(self):
+        if not all(isinstance(arg, int) for arg in (self.__start, self.__stop, self.__step)):
+            raise TypeError('Arguments must be integers')
+        return True
+
     def __next__(self):
-        if self.__step > 0 and self.__start >= self.__stop or (self.__step < 0 and self.__start <= self.__stop):
-            raise StopIteration
+        if self.is_valid_arguments():
+            if self.__step > 0 and self.__start >= self.__stop or (self.__step < 0 and self.__start <= self.__stop):
+                raise StopIteration
 
-        if self.__step == 0:
-            raise ValueError("Step cannot be 0")
-
-        current = self.__start
-        self.__start += self.__step
-        self.__range.append(current)
-        return current
+            if self.__step == 0:
+                raise ValueError("Step cannot be 0")
+            current = self.__start
+            self.__start += self.__step
+            self.__range.append(current)
+            return current
 
     def __contains__(self, item):
         return item in self.__range
 
 
 if __name__ == '__main__':
-    my_range = InRange(0, 13, 2)
+    my_range = InRange(1, 13, 2)
     for i in my_range:
         print(i)
     print(my_range.range)
