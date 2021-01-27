@@ -13,13 +13,9 @@ class InRange:
         return self
 
     def __next__(self):
-        if self.__step > 0:
-            if self.__start >= self.__stop:
-                raise StopIteration
-        elif self.__step < 0:
-            if self.__start <= self.__stop:
-                raise StopIteration
-        else:
+        if (self.__step > 0 and self.__start >= self.__stop) or (self.__step < 0 and self.__start <= self.__stop):
+            raise StopIteration
+        if self.__step == 0:
             raise ValueError("Step cannot be 0")
         current = self.__start
         self.__start += self.__step

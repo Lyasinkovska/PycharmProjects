@@ -17,6 +17,7 @@ class InRange:
             raise TypeError('Must be integer')
 
     def check_arguments(self):
+
         if len(self.__arguments) == 1 and self.__arguments[0] > 0:
             self.__stop = self.__arguments[0]
         elif len(self.__arguments) == 2 and self.__arguments[0] < self.__arguments[1]:
