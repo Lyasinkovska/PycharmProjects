@@ -5,7 +5,8 @@ import unittest
 
 
 class TestPhonebookApplication(unittest.TestCase):
-    phonebook = [{
+    def setUp(self):
+        self.phonebook = [{
             'firstname': 'Liudmyla',
             'lastname': 'Yasinkovska',
             'fullname': 'Liudmyla Yasinkovska',
