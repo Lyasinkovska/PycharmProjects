@@ -45,7 +45,7 @@ def create_contact(firstname, lastname, fullname, number, city):
     }
 
 
-def search_by_key(key, value):
+def search_by_key(key, value, phonebook):
     return [element for element in phonebook if element.get(key) == value]
 
 
@@ -118,12 +118,12 @@ if __name__ == '__main__':
             dump_into_jsonfile(add_contact_to_json(new_contact))
         elif user_choice in search_actions:
             user_input = input(f"Enter {search_actions[user_choice]}: ").title().strip()
-            found_contact = search_by_key(search_actions[user_choice], user_input)
+            found_contact = search_by_key(search_actions[user_choice], user_input, phonebook)
             print_contacts(found_contact)
         elif user_choice in ('d', 'u'):
             action = {'d': 'delete', 'u': 'update'}
             user_input = input(f"Enter number of a contact you want to {action[user_choice]}: ").title().strip()
-            found_contact = search_by_key('number', user_input)
+            found_contact = search_by_key('number', user_input, phonebook)
             print_contacts(found_contact)
             if found_contact:
                 index = input(f'Please choose index of a contact you want to {action[user_choice]}: ')

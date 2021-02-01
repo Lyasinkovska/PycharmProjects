@@ -12,4 +12,5 @@ def make_country(name, capital):
     return countries
 
 
-print(make_country("Ukraine", "Kyiv"))
+if __name__ == '__main__':
+    print(make_country("Ukraine", "Kyiv"))
