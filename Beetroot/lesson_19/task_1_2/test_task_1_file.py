@@ -7,13 +7,13 @@ class raises errors or you have errors in the runtime context suite.
 """
 import unittest
 
-from lesson_19.task_1.task_1_file import File
+from lesson_19.task_1_2.task_1_file import File
 
 
 class TestFile(unittest.TestCase):
     def setUp(self) -> None:
-        self.readfile = 'test_read_file.txt'
-        self.writefile = 'test_write_file.txt'
+        self.readfile = 'files/test_read_file.txt'
+        self.writefile = 'files/test_write_file.txt'
         self.text = 'This is test file'
         self.write_mode = 'w'
         self.read_mode = 'r'
@@ -51,7 +51,7 @@ class TestFile(unittest.TestCase):
         self.assertTrue(file.closed, 'file is not closed')
 
     def test_counter(self):
-        new_file = File('new_file.txt', self.write_mode)
+        new_file = File('files/new_file.txt', self.write_mode)
         self.assertEqual(new_file.counter, 1, 'only one created instance')
 
     def tearDown(self) -> None:

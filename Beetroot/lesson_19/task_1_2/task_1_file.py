@@ -16,7 +16,7 @@ class File:
         self.filename = filename
         self.file = open(self.filename, self.mode)
 
-        logging.basicConfig(filename='files_opened.log', level=logging.INFO, filemode='a',
+        logging.basicConfig(filename='files/files_opened.log', level=logging.INFO, filemode='a',
                             format=f'%(name)s - %(levelname)s - %(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
         File.counter += 1
 
@@ -31,10 +31,10 @@ class File:
 
 if __name__ == '__main__':
 
-    with File('../task_3/sample.txt', 'l') as f:
+    with File('files/new_file.txt', 'l') as f:
         print(f.read())
 
-    with File('next_file.txt', 'w') as h:
+    with File('files/next_file.txt', 'w') as h:
         for i in range(5):
             h.write(f'Hello {i}\n')
     print(h.closed)
