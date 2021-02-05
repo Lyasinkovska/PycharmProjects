@@ -5,10 +5,9 @@ Take your implementation of the context manager class from Task 1 and write test
 cases as you can, positive ones when a file exists and everything works as designed. And also, write tests when your
 class raises errors or you have errors in the runtime context suite.
 """
-
 import unittest
 
-from lesson_19.task_1_file import File
+from lesson_19.task_1.task_1_file import File
 
 
 class TestFile(unittest.TestCase):
@@ -54,6 +53,9 @@ class TestFile(unittest.TestCase):
     def test_counter(self):
         new_file = File('new_file.txt', self.write_mode)
         self.assertEqual(new_file.counter, 1, 'only one created instance')
+
+    def tearDown(self) -> None:
+        pass
 
 
 if __name__ == '__main__':

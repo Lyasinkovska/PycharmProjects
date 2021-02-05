@@ -14,16 +14,14 @@ class File:
         self.__allowed_modes = ('r', 'r+', 'rb', 'w', 'w+', 'wb', 'wb+', 'a', 'a+', 'ab', 'ab+')
         self.mode = mode if mode in self.__allowed_modes else 'r'
         self.filename = filename
+        self.file = open(self.filename, self.mode)
+
         logging.basicConfig(filename='files_opened.log', level=logging.INFO, filemode='a',
                             format=f'%(name)s - %(levelname)s - %(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
         File.counter += 1
 
     def __enter__(self):
-        try:
-            self.file = open(self.filename, self.mode)
-            return self.file
-        except IOError:
-            logging.info(f'file {File.counter}: {self.filename}')
+        return self.file
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type is not None:
@@ -33,7 +31,7 @@ class File:
 
 if __name__ == '__main__':
 
-    with File('sample.txt', 'l') as f:
+    with File('../task_3/sample.txt', 'l') as f:
         print(f.read())
 
     with File('next_file.txt', 'w') as h:
