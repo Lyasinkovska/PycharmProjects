@@ -14,19 +14,20 @@ class File:
         self.__allowed_modes = ('r', 'r+', 'rb', 'w', 'w+', 'wb', 'wb+', 'a', 'a+', 'ab', 'ab+')
         self.mode = mode if mode in self.__allowed_modes else 'r'
         self.filename = filename
-        self.file = open(self.filename, self.mode)
+        self.closed = False
 
+    def __enter__(self):
+        self.file = open(self.filename, self.mode)
         logging.basicConfig(filename='files/files_opened.log', level=logging.INFO, filemode='a',
                             format=f'%(name)s - %(levelname)s - %(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
         File.counter += 1
-
-    def __enter__(self):
         return self.file
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type is not None:
             logging.error(f'file {File.counter}: {self.filename}, raised exception:({exc_type.__name__})')
         self.file.close()
+        self.closed = True
 
 
 if __name__ == '__main__':

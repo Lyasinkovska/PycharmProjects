@@ -49,3 +49,4 @@ root - ERROR - 04-Feb-21 16:12:56 - file 1: sample.txt, raised exception:(Unsupp
 root - INFO - 04-Feb-21 16:13:11 - file 1: sample.txt
 root - INFO - 04-Feb-21 16:13:11 - file 2: next_file.txt
 root - ERROR - 05-Feb-21 11:14:09 - file 2: next_file.txt, raised exception:(NameError)
+root - ERROR - 08-Feb-21 16:13:35 - file 1: /tmp/tmp_x7h7qho, raised exception:(AttributeError)
