@@ -14,14 +14,15 @@ def question1(first_list: List[int], second_list: List[int]) -> List[int]:
     return res
 
 
-# 1 - n
+
+# 2 - 1
 def question2(n: int) -> int:
     for _ in range(10):
         n **= 3
     return n
 
 
-# 2 - 1
+# 1 - n*2
 def question3(first_list: List[int], second_list: List[int]) -> List[int]:
     temp: List[int] = first_list[:]
     for el_second_list in second_list:
