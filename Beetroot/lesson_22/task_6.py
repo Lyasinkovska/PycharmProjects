@@ -9,24 +9,28 @@ assert sdvig(543210, 3) == 210543
 """
 
 
-def digits_shift(number: int, step: int = 1) -> int:
-    if number < 10:
-        return number
-
+def tens_in_number(number: int) -> int:
     tens = 0
-    result = number
-
     while number > 9:
         number = number // 10
         tens += 1
+    return tens
+
+
+def digits_shift(number: int, step: int = 1) -> int:
+    tens = tens_in_number(number)
+    if number < 10:
+        return number
 
     while step:
-        result = (result % 10) * (10 ** tens) + result // 10
+        number = (number % 10) * (10 ** tens) + number // 10
         step -= 1
-    return result
+    return number
 
 
 if __name__ == '__main__':
+    print(digits_shift(10002))
+    print(digits_shift(10002, 4))
     assert digits_shift(1) == 1
     assert digits_shift(123) == 312
     assert digits_shift(120) == 12
