@@ -28,11 +28,22 @@ def digits_shift(number: int, step: int = 1) -> int:
     return number
 
 
+def digits(number, step=1):
+    tens = tens_in_number(number)
+    print(number)
+    if number < 10:
+        return number
+
+    return (number % 10) * (10 ** tens) + digits(number // 10, step-1)
+
+
 if __name__ == '__main__':
-    print(digits_shift(10002))
-    print(digits_shift(10002, 4))
-    assert digits_shift(1) == 1
-    assert digits_shift(123) == 312
-    assert digits_shift(120) == 12
-    assert digits_shift(120, 2) == 201
-    assert digits_shift(543210, 3) == 210543
+    # print(digits_shift(10002))
+    # print(digits_shift(10002, 4))
+    # assert digits_shift(1) == 1
+    # assert digits_shift(123) == 312
+    # assert digits_shift(120) == 12
+    # assert digits_shift(120, 2) == 201
+    # assert digits_shift(543210, 3) == 210543
+    # print(digits(123, 3))
+    print(tens_in_number(100))
