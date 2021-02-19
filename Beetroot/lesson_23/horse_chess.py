@@ -33,7 +33,6 @@ class Board:
         while queue:
 
             current = queue[0]
-            print(queue)
             queue.popleft()
 
             if current.current_position == destination:
@@ -42,7 +41,8 @@ class Board:
             for step in figure.possible_steps:
                 next_position = current.x + step[0], current.y + step[1]
 
-                if self.is_valid(next_position) and self.is_valid(destination) and next_position not in figure.visited_cells:
+                if self.is_valid(next_position) and self.is_valid(
+                    destination) and next_position not in figure.visited_cells:
                     figure.visited_cells.append(next_position)
                     queue.append(Horse(next_position[0], next_position[1], current.dist + 1))
 
