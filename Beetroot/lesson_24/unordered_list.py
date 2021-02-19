@@ -25,11 +25,13 @@ class UnorderedList:
         adds a new item to the end of the list making it the last item in the collection.
         It needs the item and returns nothing. Assume the item is not already in the list.
         """
-        temp = Node(item)
-        current = self._head
-        while current.get_next() is not None:
-            current = current.get_next()
-        current.set_next(temp)
+        if self._head is None:
+            self._head = Node(item)
+        else:
+            current = self._head
+            while current.get_next():
+                current = current.get_next()
+            current.set_next(Node(item))
 
     def pop(self):
         """
@@ -68,6 +70,9 @@ class UnorderedList:
         adds a new item to the list at position pos. It needs the item and returns nothing.
         Assume the item is not already in the list and there are enough existing items to have position pos.
         """
+        if pos > self.size() or pos < 0:
+            raise AttributeError(f'Cannot insert in {self.__class__.__name__} of length {self.size()}')
+
         new_node = Node(item)
         current = self._head
         previous = None
@@ -93,6 +98,26 @@ class UnorderedList:
             previous.set_next(new_node)
             new_node.set_next(current)
             current = new_node
+
+    def slice(self, start: int, stop: int) -> 'UnorderedList':
+        """
+        take two parameters `start` and `stop`, and return a copy of the list starting at the position and going
+        up to but not including the stop position
+        """
+        sliced_list = UnorderedList()
+        if not 0 <= start <= self.size():
+            start = 0
+        if not 0 <= stop <= self.size():
+            stop = self.size()
+
+        counter = 0
+        current = self._head
+        while stop > counter:
+            if counter in range(start, stop):
+                sliced_list.append(current)
+            current = current.get_next()
+            counter += 1
+        return sliced_list
 
     def size(self):
         current = self._head
@@ -158,10 +183,10 @@ if __name__ == "__main__":
     # print(my_list.size())
     print(my_list)
 
-    my_list.insert(9, 10)
+    my_list.insert(1, 10)
     print(my_list)
+    print(my_list.slice(10, 10))
 
-    print(my_list)
     # print(my_list.index(5))
     # print(my_list.index(6))
     # print(my_list.index(100))
