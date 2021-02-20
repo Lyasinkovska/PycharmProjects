@@ -29,8 +29,9 @@ class Queue:
         new_item = Node(item)
         if self.__rear is None:
             self.__front = self.__rear = new_item
-        new_item.set_next(self.__rear)
-        self.__rear = new_item
+        else:
+            new_item.set_next(self.__rear)
+            self.__rear = new_item
         self.__size += 1
 
     def dequeue(self) -> None:
