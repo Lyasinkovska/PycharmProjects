@@ -21,7 +21,5 @@ if __name__ == '__main__':
     collection = [i for i in range(100)]
     print(binary_search(99, collection))
     print(binary_search(120, collection))
-    animals = ['cat', 'dog', 'bird', 'snake', 'elephant', 'tiger', 'cow']
-    print(binary_search('tiger', animals))
-    print(binary_search('lion', animals))
+
 
