@@ -8,24 +8,28 @@ and describe under what circumstances it might be appropriate.
 # recursive Bubble Sort
 
 def bubble_sort_both_sides(iterable):
-    size = len(iterable) - 1
+    start = 0
+    stop = len(iterable) - 1
 
-    swapped = False
+    swapped = True
+    while swapped:
+        swapped = False
+        for i in range(stop):
+            if iterable[i] > iterable[i + 1]:
+                iterable[i], iterable[i + 1] = iterable[i + 1], iterable[i]
+                swapped = True
+        stop -= 1
+        if not swapped:
+            break
 
-    for i in range(size):
-        if iterable[i] > iterable[i + 1]:
-            iterable[i], iterable[i + 1] = iterable[i + 1], iterable[i]
-            swapped = True
+        for i in range(stop, start, -1):
+            if iterable[i] < iterable[i - 1]:
+                iterable[i], iterable[i - 1] = iterable[i - 1], iterable[i]
+                swapped = True
 
-    for i in range(size, 0, -1):
-        if iterable[i] < iterable[i - 1]:
-            iterable[i], iterable[i - 1] = iterable[i - 1], iterable[i]
-            swapped = True
+        start += 1
 
-    if not swapped:
-        return iterable
-
-    return bubble_sort_both_sides(iterable)
+    return iterable
 
 
 if __name__ == '__main__':
