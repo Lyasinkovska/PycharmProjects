@@ -87,3 +87,7 @@ if __name__ == "__main__":
     print(2 in H)
     print('cat' in H.data)
     print(len(H))
+    H[False] = 'piglet'
+    H[True] = 'piglet'
+    print(False in H)
+    print(True in H)
