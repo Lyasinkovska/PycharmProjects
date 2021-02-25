@@ -4,8 +4,7 @@ Implement the mergeSort function without using the slice operator.
 
 
 def merge_sort(array, left_index=0, right_index=None):
-    if right_index is None:
-        right_index = len(array) - 1
+    right_index = right_index or len(array)
 
     if right_index - left_index > 1:
 
@@ -30,5 +29,5 @@ def merge_sort(array, left_index=0, right_index=None):
 
 
 if __name__ == '__main__':
-    array = [19, 1, 50, 21, 2, 23]  # [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    array = [5, 1, 9, 3]  # [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print(merge_sort(array))
