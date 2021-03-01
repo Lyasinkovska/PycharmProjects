@@ -15,5 +15,4 @@ while True:
     message, client_address = sock.recvfrom(SIZE)
     print('connection from', client_address, message)
     if message:
-        message_to_send = str.encode(MESSAGE)
-        sock.sendto(message_to_send, client_address)
+        sock.sendto(MESSAGE.encode(), client_address)
