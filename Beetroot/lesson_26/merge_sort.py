@@ -29,5 +29,5 @@ def merge_sort(array, left_index=0, right_index=None):
 
 
 if __name__ == '__main__':
-    array = [5, 1, 9, 3]  # [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    array = [5, 1, 9, 3, 0]  # [54, 26, 93, 17, 77, 31, 44, 55, 20]
     print(merge_sort(array))
