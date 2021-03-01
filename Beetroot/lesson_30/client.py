@@ -1,11 +1,15 @@
 import socket
+import pickle
 
-HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 65432        # The port used by the server
+HOST = '127.0.0.1'
+PORT = 65000
+KEY = -6
+message = {'msg': 'Hello server', 'key': KEY}
+msg = pickle.dumps(message)
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    s.sendall(b'Hello, world')
-    data = s.recv(1024)
+    s.sendall(msg)
+    data = s.recv(1024).decode()
 
-print('Received', repr(data))
+print('Received', data)
