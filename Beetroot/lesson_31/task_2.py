@@ -55,5 +55,4 @@ if __name__ == '__main__':
     file_name = 'reddit_comments_socialskills.json'
 
     comms = get_comments_from_reddit(URL, param=subreddit)
-    print(type(comms))
     save_to_json_file(comms, file_name)
