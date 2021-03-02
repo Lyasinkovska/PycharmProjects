@@ -1,10 +1,10 @@
+import json
 import socket
-import pickle
+from json.decoder import JSONDecodeError
 
 from caesar_cypher import encrypt_caesar
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-pkl_str = b''
 
 server_address = ('localhost', 65000)
 print('starting up on {} port {}'.format(*server_address))
@@ -20,11 +20,12 @@ while True:
 
         while True:
             data = connection.recv(1024)
-            pkl_str += data
-            received_dict = pickle.loads(pkl_str)
-            msg, key = received_dict.get('msg'), received_dict.get('key')
+            try:
+                received_dict = json.loads(data)
+            except JSONDecodeError:
+                pass
+            msg, key = received_dict.get("msg"), received_dict.get("key")
             msg_to_send = encrypt_caesar(msg, key)
-
             if data:
                 print('sending data back to the client')
                 connection.sendall(msg_to_send.encode())
