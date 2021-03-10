@@ -2,8 +2,9 @@ class Stack:
     def __init__(self):
         self._items = []
 
+    @property
     def is_empty(self):
-        return bool(self._items)
+        return not len(self._items)
 
     def push(self, item):
         self._items.append(item)
@@ -14,23 +15,24 @@ class Stack:
     def peek(self):
         return self._items[len(self._items) - 1]
 
-    def size(self):
-        return len(self._items)
 
     def __repr__(self):
         representation = "<Stack>\n"
-        for ind, item in enumerate(reversed(self._items), 1):
-            representation += f"{ind}: {str(item)}\n"
-        return representation
+        # for ind, item in enumerate(reversed(self._items), 1):
+        #     representation += f"{ind}: {str(item)}\n"
+        return representation + f"{self._items}"
 
     def __str__(self):
         return self.__repr__()
+
+    def __len__(self):
+        return len(self._items)
 
 
 if __name__ == "__main__":
     s = Stack()
 
-    print(s.is_empty())
+    print(s.is_empty)
     s.push(4)
     s.push('dog')
     print(s.peek())
